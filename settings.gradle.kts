@@ -1,2 +1,2 @@
-rootProject.name = "ed-digital-library2"
+rootProject.name = "ed-digital-library"
 
