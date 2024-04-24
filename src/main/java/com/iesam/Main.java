@@ -7,16 +7,10 @@ public class Main {
     public static void main(String[] args) {
         createUser();
     }
-    public static void createUser(){
-        User user = new User(
-                "11111111A",
-                "01",
-                "Alejandro",
-                "de Pablo",
-                "alejandro@email.com",
-                "20",
-                "612345678"
-        );
-        UserPresentation.createUser(user);
+
+
+    public static void createUser() {
+        UserPresentation.createUser();
     }
+
 }

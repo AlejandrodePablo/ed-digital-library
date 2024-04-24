@@ -7,10 +7,14 @@ import java.util.*;
 
 public class UserMemLocalDataSource {
 
-    public static UserDataRepository instance = null;
+    // public static UserDataRepository instance = null;
+    private UserDataRepository userDataRepository;
 
-    public UserMemLocalDataSource(){ }
-
+    /*
+    public UserMemLocalDataSource() {
+        userDataRepository = new UserDataRepository();
+    }
+     */
     private Map<String, User> dataStore = new TreeMap<>();
 
     public void save(User model) {
@@ -35,10 +39,12 @@ public class UserMemLocalDataSource {
         dataStore.remove(modelId);
     }
 
+   /*
     public static UserDataRepository newInstance() {
         if (instance == null) {
             instance = new UserDataRepository();
         }
         return instance;
     }
+    */
 }
