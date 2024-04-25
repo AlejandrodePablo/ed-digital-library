@@ -7,4 +7,6 @@ public interface UserRepository {
     boolean createUser(User user);
 
     List<User> getUsers();
+
+    User getUser(String id);
 }

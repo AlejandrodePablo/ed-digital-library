@@ -19,4 +19,9 @@ public class StubUserDataRepository implements UserRepository {
     public List<User> getUsers() {
         return null;
     }
+
+    @Override
+    public User getUser(String id) {
+        return null;
+    }
 }
