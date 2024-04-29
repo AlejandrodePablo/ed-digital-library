@@ -2,6 +2,7 @@ package com.iesam.digitallibrary.features.presentation;
 
 import com.iesam.digitallibrary.features.data.UserDataRepository;
 import com.iesam.digitallibrary.features.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.features.domain.GetUserUseCase;
 import com.iesam.digitallibrary.features.domain.ListUsersUseCase;
 import com.iesam.digitallibrary.features.domain.NewUserUseCase;
 import com.iesam.digitallibrary.features.domain.User;
@@ -32,7 +33,7 @@ public class UserPresentation {
 
         scanner.close();
 
-        User newUser = new User(id, dni, name, surname, email, age, telephone);
+        User newUser = new User(dni, id, name, surname, email, age, telephone);
         NewUserUseCase newUserUseCase = new NewUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
         newUserUseCase.execute(newUser);
     }
@@ -42,4 +43,11 @@ public class UserPresentation {
         List<User> users = listUsersUseCase.execute();
         System.out.println(users.toString());
     }
+
+    public static void getUser(String id) {
+        GetUserUseCase getUserUseCase = new GetUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
+        User user = getUserUseCase.execute(id);
+        System.out.println(user.toString());
+    }
+
 }

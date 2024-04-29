@@ -4,8 +4,9 @@ import com.iesam.digitallibrary.features.presentation.UserPresentation;
 
 public class Main {
     public static void main(String[] args) {
-        createUser();
+        //createUser();
         getUsers();
+        getUser();
     }
 
 
@@ -16,5 +17,10 @@ public class Main {
     public static void getUsers() {
         UserPresentation.getUsers();
     }
+
+    public static void getUser() {
+        UserPresentation.getUser("1");
+    }
+
 
 }

@@ -26,4 +26,8 @@ public class UserDataRepository implements UserRepository {
         return userFileLocalDataSource.findAll();
     }
 
+    @Override
+    public User getUser(String id) {
+        return userFileLocalDataSource.findById(id);
+    }
 }
