@@ -30,5 +30,4 @@ class GetUserUseCaseTest {
         //Then
         Assertions.assertNull(getUser);
     }
-
 }

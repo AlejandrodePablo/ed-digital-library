@@ -9,4 +9,5 @@ public interface UserRepository {
     List<User> getUsers();
 
     User getUser(String id);
+
 }

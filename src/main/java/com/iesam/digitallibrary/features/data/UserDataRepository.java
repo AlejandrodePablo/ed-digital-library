@@ -30,5 +30,4 @@ public class UserDataRepository implements UserRepository {
     public User getUser(String id) {
         return userFileLocalDataSource.findById(id);
     }
-
 }

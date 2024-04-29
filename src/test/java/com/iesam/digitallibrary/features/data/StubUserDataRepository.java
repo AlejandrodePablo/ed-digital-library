@@ -24,4 +24,5 @@ public class StubUserDataRepository implements UserRepository {
     public User getUser(String id) {
         return null;
     }
+
 }

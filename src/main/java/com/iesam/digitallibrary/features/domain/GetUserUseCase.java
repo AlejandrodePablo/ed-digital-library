@@ -11,4 +11,5 @@ public class GetUserUseCase {
     public User execute(String id) {
         return this.userRepository.getUser(id);
     }
+
 }
