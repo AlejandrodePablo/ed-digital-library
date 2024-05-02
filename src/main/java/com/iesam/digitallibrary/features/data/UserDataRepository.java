@@ -30,4 +30,9 @@ public class UserDataRepository implements UserRepository {
     public User getUser(String id) {
         return userFileLocalDataSource.findById(id);
     }
+
+    @Override
+    public void deleteUser(String id) {
+        this.userFileLocalDataSource.delete(id);
+    }
 }
