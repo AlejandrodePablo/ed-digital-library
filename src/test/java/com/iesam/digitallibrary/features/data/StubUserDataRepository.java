@@ -27,7 +27,7 @@ public class StubUserDataRepository implements UserRepository {
 
     @Override
     public void deleteUser(String id) {
-        
+
     }
 
     @Override
