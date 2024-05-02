@@ -34,15 +34,4 @@ public class StubUserDataRepository implements UserRepository {
     public void updateUser(User user) {
 
     }
-
-    @Override
-    public void updateUser(User user) {
-
-    }
-
-    @Override
-    public void updateUser(User user) {
-
-    }
-
 }
