@@ -51,4 +51,25 @@ public class UserPresentation {
         DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
         deleteUserUseCase.execute(id);
     }
+
+    public static void updateUser() {
+        System.out.println("ID del usuario a actualizar: ");
+        String id = scanner.nextLine();
+        System.out.println("Nuevo DNI: ");
+        String dni = scanner.nextLine();
+        System.out.println("Nuevo nombre: ");
+        String name = scanner.nextLine();
+        System.out.println("Nuevo apellido: ");
+        String surname = scanner.nextLine();
+        System.out.println("Nuevo email: ");
+        String email = scanner.nextLine();
+        System.out.println("Nueva edad: ");
+        String age = scanner.nextLine();
+        System.out.println("Nuevo teléfono: ");
+        String telephone = scanner.nextLine();
+
+        User updatedUser = new User(dni, id, name, surname, email, age, telephone);
+        UpdateUserUseCase updateUserUseCase = new UpdateUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
+        updateUserUseCase.execute(updatedUser);
+    }
 }
