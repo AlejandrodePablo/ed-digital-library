@@ -7,7 +7,9 @@ public class Main {
         //createUser();
         //getUsers();
         //getUser();
-        deleteUser();
+        //deleteUser();
+        updateUser();
+        getUsers();
     }
 
 
@@ -20,11 +22,15 @@ public class Main {
     }
 
     public static void getUser() {
-        UserPresentation.getUser("1");
+        UserPresentation.getUser("01");
     }
 
 
     public static void deleteUser() {
-        UserPresentation.deleteUser("1");
+        UserPresentation.deleteUser("02");
+    }
+
+    public static void updateUser() {
+        UserPresentation.updateUser();
     }
 }
