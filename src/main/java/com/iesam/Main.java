@@ -30,7 +30,6 @@ public class Main {
         UserPresentation.getUser("01");
     }
 
-
     public static void deleteUser() {
         UserPresentation.deleteUser("02");
     }
