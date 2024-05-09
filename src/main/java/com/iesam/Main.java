@@ -5,8 +5,9 @@ import com.iesam.digitallibrary.features.presentation.UserPresentation;
 public class Main {
     public static void main(String[] args) {
         //createUser();
-        getUsers();
-        getUser();
+        //getUsers();
+        //getUser();
+        deleteUser();
     }
 
 
@@ -23,4 +24,7 @@ public class Main {
     }
 
 
+    public static void deleteUser() {
+        UserPresentation.deleteUser("1");
+    }
 }

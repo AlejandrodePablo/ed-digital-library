@@ -25,4 +25,9 @@ public class StubUserDataRepository implements UserRepository {
         return null;
     }
 
+    @Override
+    public void deleteUser(String id) {
+        
+    }
+
 }

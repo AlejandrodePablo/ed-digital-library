@@ -2,10 +2,7 @@ package com.iesam.digitallibrary.features.presentation;
 
 import com.iesam.digitallibrary.features.data.UserDataRepository;
 import com.iesam.digitallibrary.features.data.local.UserFileLocalDataSource;
-import com.iesam.digitallibrary.features.domain.GetUserUseCase;
-import com.iesam.digitallibrary.features.domain.ListUsersUseCase;
-import com.iesam.digitallibrary.features.domain.NewUserUseCase;
-import com.iesam.digitallibrary.features.domain.User;
+import com.iesam.digitallibrary.features.domain.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -50,4 +47,8 @@ public class UserPresentation {
         System.out.println(user.toString());
     }
 
+    public static void deleteUser(String id) {
+        DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
+        deleteUserUseCase.execute(id);
+    }
 }
