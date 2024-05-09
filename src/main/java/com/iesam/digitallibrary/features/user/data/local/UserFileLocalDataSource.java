@@ -1,8 +1,8 @@
-package com.iesam.digitallibrary.features.data.local;
+package com.iesam.digitallibrary.features.user.data.local;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.iesam.digitallibrary.features.domain.User;
+import com.iesam.digitallibrary.features.user.domain.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;

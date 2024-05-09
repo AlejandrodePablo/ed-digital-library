@@ -1,6 +1,7 @@
 package com.iesam.digitallibrary.features.domain;
 
 import com.iesam.digitallibrary.features.data.StubUserDataRepository;
+import com.iesam.digitallibrary.features.user.domain.DeleteUserUseCase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
