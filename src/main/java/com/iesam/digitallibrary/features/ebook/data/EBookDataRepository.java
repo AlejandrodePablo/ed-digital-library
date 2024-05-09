@@ -15,4 +15,9 @@ public class EBookDataRepository implements EBookRepository {
     public void createEBook(EBook eBook) {
         eBookFileLocalDataSource.save(eBook);
     }
+
+    @Override
+    public void deleteEBook(String isbn) {
+        eBookFileLocalDataSource.delete(isbn);
+    }
 }
