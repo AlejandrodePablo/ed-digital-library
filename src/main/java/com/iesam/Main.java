@@ -14,6 +14,7 @@ public class Main {
         //getUsers();
 
         createEBook();
+        deleteEbook();
     }
 
 
@@ -39,5 +40,9 @@ public class Main {
 
     public static void createEBook() {
         EBookPresentation.createEBook();
+    }
+
+    public static void deleteEbook() {
+        EBookPresentation.deleteEBook();
     }
 }
