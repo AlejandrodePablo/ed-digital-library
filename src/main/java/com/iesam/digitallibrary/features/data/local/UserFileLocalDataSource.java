@@ -23,6 +23,20 @@ public class UserFileLocalDataSource {
     private final Type typeList = new TypeToken<ArrayList<User>>() {
     }.getType();
 
+    public void update(User updatedUser) {
+        List<User> users = findAll();
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.id.equals(updatedUser.id)) {
+                users.set(i, updatedUser);
+                saveToFile(users);
+                System.out.println("Usuario actualizado correctamente");
+                return;
+            }
+        }
+        System.out.println("el usuario con ID " + updatedUser.id + "no existe");
+    }
+
     public void save(User model) {
         List<User> models = findAll();
         models.add(model);
