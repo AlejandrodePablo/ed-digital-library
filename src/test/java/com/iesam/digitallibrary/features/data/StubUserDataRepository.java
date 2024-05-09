@@ -1,7 +1,7 @@
 package com.iesam.digitallibrary.features.data;
 
-import com.iesam.digitallibrary.features.domain.User;
-import com.iesam.digitallibrary.features.domain.UserRepository;
+import com.iesam.digitallibrary.features.user.domain.User;
+import com.iesam.digitallibrary.features.user.domain.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,11 @@ public class StubUserDataRepository implements UserRepository {
     @Override
     public void deleteUser(String id) {
         
+    }
+
+    @Override
+    public void updateUser(User user) {
+
     }
 
 }

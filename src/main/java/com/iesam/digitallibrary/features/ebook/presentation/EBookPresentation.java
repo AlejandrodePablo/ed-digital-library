@@ -5,9 +5,12 @@ import com.iesam.digitallibrary.features.ebook.data.local.EBookFileLocalDataSour
 import com.iesam.digitallibrary.features.ebook.domain.EBook;
 import com.iesam.digitallibrary.features.ebook.domain.NewEBookUseCase;
 
-import static com.iesam.digitallibrary.features.user.presentation.UserPresentation.scanner;
+import java.util.Scanner;
+
 
 public class EBookPresentation {
+
+    static Scanner scanner = new Scanner(System.in);
 
     public static void createEBook() {
 
