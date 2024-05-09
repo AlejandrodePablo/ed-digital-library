@@ -52,5 +52,4 @@ public class UserMemLocalDataSource {
             System.out.println("User with ID" + updatedUser.id + " does not exist");
         }
     }
-
 }
