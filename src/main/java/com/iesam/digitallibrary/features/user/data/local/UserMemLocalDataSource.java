@@ -7,15 +7,20 @@ import java.util.*;
 
 public class UserMemLocalDataSource {
 
-    // public static UserDataRepository instance = null;
-    private UserDataRepository userDataRepository;
+    public static UserMemLocalDataSource instance = null;
 
-    /*
-    public UserMemLocalDataSource() {
-        userDataRepository = new UserDataRepository();
-    }
-     */
     private Map<String, User> dataStore = new TreeMap<>();
+
+    public UserMemLocalDataSource() {
+        //Private Constructor
+    }
+
+    public static UserMemLocalDataSource getInstance() {
+        if (instance == null) {
+            instance = new UserMemLocalDataSource();
+        }
+        return instance;
+    }
 
     public void save(User model) {
         dataStore.put(model.id, model);
@@ -39,12 +44,13 @@ public class UserMemLocalDataSource {
         dataStore.remove(modelId);
     }
 
-   /*
-    public static UserDataRepository newInstance() {
-        if (instance == null) {
-            instance = new UserDataRepository();
+    public void update(User updatedUser) {
+        if (dataStore.containsKey(updatedUser.id)) {
+            dataStore.put(updatedUser.id, updatedUser);
+            System.out.println("User updated successfully");
+        } else {
+            System.out.println("User with ID" + updatedUser.id + " does not exist");
         }
-        return instance;
     }
-    */
+
 }
