@@ -1,6 +1,7 @@
 package com.iesam.digitallibrary.features.user.data;
 
 import com.iesam.digitallibrary.features.user.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.features.user.data.local.UserMemLocalDataSource;
 import com.iesam.digitallibrary.features.user.domain.User;
 import com.iesam.digitallibrary.features.user.domain.UserRepository;
 
@@ -8,10 +9,13 @@ import java.util.List;
 
 public class UserDataRepository implements UserRepository {
 
-    //UserMemLocalDataSource userMemLocalDataSource = new UserMemLocalDataSource();
-    UserFileLocalDataSource userFileLocalDataSource = new UserFileLocalDataSource();
+    public static final UserMemLocalDataSource userMemLocalDataSource = UserMemLocalDataSource.getInstance();
+    public static final UserFileLocalDataSource userFileLocalDataSource = UserFileLocalDataSource.getInstance();
 
-    // public UserDataRepository(UserMemLocalDataSource userMemLocalDataSource) {    }
+
+    public UserDataRepository(UserMemLocalDataSource userDataSource) {
+    }
+
     public UserDataRepository(UserFileLocalDataSource userFileLocalDataSource) {
     }
 
