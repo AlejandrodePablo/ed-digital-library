@@ -16,12 +16,25 @@ import java.util.Scanner;
 
 public class UserFileLocalDataSource {
 
+    private static UserFileLocalDataSource instance;
+
     private String nameFile = "User.txt";
 
     private Gson gson = new Gson();
 
     private final Type typeList = new TypeToken<ArrayList<User>>() {
     }.getType();
+
+    private UserFileLocalDataSource() {
+        // Private Constructor
+    }
+
+    public static UserFileLocalDataSource getInstance() {
+        if (instance == null) {
+            instance = new UserFileLocalDataSource();
+        }
+        return instance;
+    }
 
     public void update(User updatedUser) {
         List<User> users = findAll();
