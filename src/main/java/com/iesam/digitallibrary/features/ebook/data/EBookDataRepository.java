@@ -20,4 +20,9 @@ public class EBookDataRepository implements EBookRepository {
     public void deleteEBook(String isbn) {
         eBookFileLocalDataSource.delete(isbn);
     }
+
+    @Override
+    public EBook getEBook(String isbn) {
+        return eBookFileLocalDataSource.findById(isbn);
+    }
 }
