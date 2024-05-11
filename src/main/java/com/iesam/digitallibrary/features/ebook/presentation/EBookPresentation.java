@@ -2,9 +2,7 @@ package com.iesam.digitallibrary.features.ebook.presentation;
 
 import com.iesam.digitallibrary.features.ebook.data.EBookDataRepository;
 import com.iesam.digitallibrary.features.ebook.data.local.EBookFileLocalDataSource;
-import com.iesam.digitallibrary.features.ebook.domain.DeleteEBookUseCase;
-import com.iesam.digitallibrary.features.ebook.domain.EBook;
-import com.iesam.digitallibrary.features.ebook.domain.NewEBookUseCase;
+import com.iesam.digitallibrary.features.ebook.domain.*;
 
 import java.util.Scanner;
 
@@ -34,9 +32,23 @@ public class EBookPresentation {
     }
 
     public static void deleteEBook() {
-        System.out.println("ISBN del eBook a eliminar: ");
+        System.out.println("eBook ISBN to delete: ");
         String isbn = scanner.nextLine();
         DeleteEBookUseCase deleteEBookUseCase = new DeleteEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
         deleteEBookUseCase.execute(isbn);
+    }
+
+    public static void getEBook(){
+        System.out.println("eBook ISBN to list: ");
+        String isbn = scanner.nextLine();
+
+        GetEBookUseCase getEBookUseCase = new GetEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
+        EBook eBook = getEBookUseCase.execute(isbn);
+
+        if(eBook!=null){
+            System.out.println(eBook.toString());
+        } else{
+            System.out.println("eBook with ISBN "+isbn+" does not exist");
+        }
     }
 }
