@@ -15,7 +15,8 @@ public class Main {
         //createEBook();
         //deleteEBook();
         //getEBook();
-        getEbooks();
+        //getEbooks();
+        updateEBook();
     }
 
 
@@ -55,4 +56,9 @@ public class Main {
     public static void getEbooks(){
         EBookPresentation.getEbooks();
     }
+    public static void updateEBook(){
+        EBookPresentation.updateEBook();
+    }
+
+
 }
