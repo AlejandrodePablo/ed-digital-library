@@ -33,4 +33,9 @@ public class EBookDataRepository implements EBookRepository {
         return eBookFileLocalDataSource.findAll();
     }
 
+    @Override
+    public void updateEBook(EBook eBook) {
+        eBookFileLocalDataSource.update(eBook);
+    }
+
 }

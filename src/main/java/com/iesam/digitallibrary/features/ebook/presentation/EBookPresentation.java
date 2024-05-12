@@ -39,23 +39,42 @@ public class EBookPresentation {
         deleteEBookUseCase.execute(isbn);
     }
 
-    public static void getEBook(){
+    public static void getEBook() {
         System.out.println("eBook ISBN to list: ");
         String isbn = scanner.nextLine();
 
         GetEBookUseCase getEBookUseCase = new GetEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
         EBook eBook = getEBookUseCase.execute(isbn);
 
-        if(eBook!=null){
+        if (eBook != null) {
             System.out.println(eBook.toString());
-        } else{
-            System.out.println("eBook with ISBN "+isbn+" does not exist");
+        } else {
+            System.out.println("eBook with ISBN " + isbn + " does not exist");
         }
     }
 
-    public static void getEbooks(){
+    public static void getEbooks() {
         ListEbooksUseCase listEbooksUseCase = new ListEbooksUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
         List<EBook> ebooks = listEbooksUseCase.execute();
         System.out.println(ebooks);
+    }
+
+    public static void updateEBook() {
+        System.out.println("ISBN del libro a actualizar: ");
+        String isbn = scanner.nextLine();
+        System.out.println("Nuevo titulo: ");
+        String title = scanner.nextLine();
+        System.out.println("Nuevo autor: ");
+        String author = scanner.nextLine();
+        System.out.println("Nuevo genero: ");
+        String genre = scanner.nextLine();
+        System.out.println("Nuevo año de publicacion: ");
+        String publicationYear = scanner.nextLine();
+        System.out.println("Nuevo idioma: ");
+        String language = scanner.nextLine();
+
+        EBook updatedEBook = new EBook(isbn, title, author, genre, publicationYear, language);
+        UpdateEBookUseCase updateEBookUseCase = new UpdateEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
+        updateEBookUseCase.execute(updatedEBook);
     }
 }
