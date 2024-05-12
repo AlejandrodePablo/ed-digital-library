@@ -4,6 +4,8 @@ import com.iesam.digitallibrary.features.ebook.data.local.EBookFileLocalDataSour
 import com.iesam.digitallibrary.features.ebook.domain.EBook;
 import com.iesam.digitallibrary.features.ebook.domain.EBookRepository;
 
+import java.util.List;
+
 public class EBookDataRepository implements EBookRepository {
 
     EBookFileLocalDataSource eBookFileLocalDataSource = new EBookFileLocalDataSource();
@@ -25,4 +27,10 @@ public class EBookDataRepository implements EBookRepository {
     public EBook getEBook(String isbn) {
         return eBookFileLocalDataSource.findById(isbn);
     }
+
+    @Override
+    public List<EBook> getEBooks() {
+        return eBookFileLocalDataSource.findAll();
+    }
+
 }
