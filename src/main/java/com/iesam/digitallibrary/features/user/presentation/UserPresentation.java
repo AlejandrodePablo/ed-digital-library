@@ -2,7 +2,6 @@ package com.iesam.digitallibrary.features.user.presentation;
 
 import com.iesam.digitallibrary.features.user.data.UserDataRepository;
 import com.iesam.digitallibrary.features.user.data.local.UserFileLocalDataSource;
-import com.iesam.digitallibrary.features.user.data.local.UserMemLocalDataSource;
 import com.iesam.digitallibrary.features.user.domain.*;
 
 import java.util.List;
@@ -14,10 +13,10 @@ public class UserPresentation {
 
     public static void createUser() {
 
-        System.out.println("DNI: ");
-        String dni = scanner.nextLine();
         System.out.println("ID: ");
         String id = scanner.nextLine();
+        System.out.println("DNI: ");
+        String dni = scanner.nextLine();
         System.out.println("Nombre: ");
         String name = scanner.nextLine();
         System.out.println("Apellido: ");
@@ -31,7 +30,7 @@ public class UserPresentation {
 
         scanner.close();
 
-        User newUser = new User(dni, id, name, surname, email, age, telephone);
+        User newUser = new User(id, dni, name, surname, email, age, telephone);
         NewUserUseCase newUserUseCase = new NewUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         newUserUseCase.execute(newUser);
     }
@@ -42,7 +41,7 @@ public class UserPresentation {
         System.out.println(users.toString());
     }
 
-    public static void getUser() {
+    public static User getUser() {
         System.out.println("User ID to list: ");
         String id = scanner.nextLine();
 
@@ -54,6 +53,7 @@ public class UserPresentation {
         } else {
             System.out.println("User with ID " + id + " does not exist.");
         }
+        return user;
     }
 
     public static void deleteUser() {
@@ -79,7 +79,7 @@ public class UserPresentation {
         System.out.println("Nuevo teléfono: ");
         String telephone = scanner.nextLine();
 
-        User updatedUser = new User(dni, id, name, surname, email, age, telephone);
+        User updatedUser = new User(id, dni, name, surname, email, age, telephone);
         UpdateUserUseCase updateUserUseCase = new UpdateUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         updateUserUseCase.execute(updatedUser);
     }
