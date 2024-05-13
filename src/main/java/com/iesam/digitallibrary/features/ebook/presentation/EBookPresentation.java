@@ -39,7 +39,7 @@ public class EBookPresentation {
         deleteEBookUseCase.execute(isbn);
     }
 
-    public static void getEBook() {
+    public static EBook getEBook() {
         System.out.println("eBook ISBN to list: ");
         String isbn = scanner.nextLine();
 
@@ -51,6 +51,7 @@ public class EBookPresentation {
         } else {
             System.out.println("eBook with ISBN " + isbn + " does not exist");
         }
+        return eBook;
     }
 
     public static void getEbooks() {
