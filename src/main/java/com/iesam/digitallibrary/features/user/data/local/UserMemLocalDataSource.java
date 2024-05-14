@@ -1,7 +1,7 @@
-package com.iesam.digitallibrary.features.data.local;
+package com.iesam.digitallibrary.features.user.data.local;
 
-import com.iesam.digitallibrary.features.data.UserDataRepository;
-import com.iesam.digitallibrary.features.domain.User;
+import com.iesam.digitallibrary.features.user.data.UserDataRepository;
+import com.iesam.digitallibrary.features.user.domain.User;
 
 import java.util.*;
 

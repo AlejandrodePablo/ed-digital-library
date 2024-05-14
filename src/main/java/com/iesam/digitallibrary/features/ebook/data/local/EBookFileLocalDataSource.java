@@ -1,8 +1,8 @@
-package com.iesam.digitallibrary.features.data.local;
+package com.iesam.digitallibrary.features.ebook.data.local;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.iesam.digitallibrary.features.domain.User;
+import com.iesam.digitallibrary.features.ebook.domain.EBook;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,40 +14,38 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class UserFileLocalDataSource {
+public class EBookFileLocalDataSource {
 
-    private String nameFile = "User.txt";
-
+    private final Type typeList = new TypeToken<ArrayList<EBook>>() {
+    }.getType();
+    private String nameFile = "EBook.txt";
     private Gson gson = new Gson();
 
-    private final Type typeList = new TypeToken<ArrayList<User>>() {
-    }.getType();
-
-    public void update(User updatedUser) {
-        List<User> users = findAll();
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            if (user.id.equals(updatedUser.id)) {
-                users.set(i, updatedUser);
-                saveToFile(users);
+    public void update(EBook updatedEBook) {
+        List<EBook> EBooks = findAll();
+        for (int i = 0; i < EBooks.size(); i++) {
+            EBook EBook = EBooks.get(i);
+            if (EBook.isbn.equals(updatedEBook.isbn)) {
+                EBooks.set(i, updatedEBook);
+                saveToFile(EBooks);
                 System.out.println("Usuario actualizado correctamente");
                 return;
             }
         }
-        System.out.println("el usuario con ID " + updatedUser.id + "no existe");
+        System.out.println("el usuario con ID " + updatedEBook.isbn + "no existe");
     }
 
-    public void save(User model) {
-        List<User> models = findAll();
+    public void save(EBook model) {
+        List<EBook> models = findAll();
         models.add(model);
         saveToFile(models);
     }
 
-    public void saveList(List<User> models) {
+    public void saveList(List<EBook> models) {
         saveToFile(models);
     }
 
-    private void saveToFile(List<User> models) {
+    private void saveToFile(List<EBook> models) {
         try {
             FileWriter myWriter = new FileWriter(nameFile);
             myWriter.write(gson.toJson(models));
@@ -59,17 +57,17 @@ public class UserFileLocalDataSource {
         }
     }
 
-    public User findById(String id) {
-        List<User> models = findAll();
-        for (User model : models) {
-            if (Objects.equals(model.id, id)) {
+    public EBook findById(String id) {
+        List<EBook> models = findAll();
+        for (EBook model : models) {
+            if (Objects.equals(model.isbn, id)) {
                 return model;
             }
         }
         return null;
     }
 
-    public List<User> findAll() {
+    public List<EBook> findAll() {
         try {
             File myObj = new File(nameFile);
             if (!myObj.exists()) {
@@ -93,10 +91,10 @@ public class UserFileLocalDataSource {
     }
 
     public void delete(String modelId) {
-        List<User> newList = new ArrayList<>();
-        List<User> models = findAll();
-        for (User model : models) {
-            if (!model.id.equals(modelId)) {
+        List<EBook> newList = new ArrayList<>();
+        List<EBook> models = findAll();
+        for (EBook model : models) {
+            if (!model.isbn.equals(modelId)) {
                 newList.add(model);
             }
         }

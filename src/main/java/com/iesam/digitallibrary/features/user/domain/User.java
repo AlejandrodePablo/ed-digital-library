@@ -1,4 +1,4 @@
-package com.iesam.digitallibrary.features.domain;
+package com.iesam.digitallibrary.features.user.domain;
 
 public class User {
 
