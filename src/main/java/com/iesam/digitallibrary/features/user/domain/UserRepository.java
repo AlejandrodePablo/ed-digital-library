@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface UserRepository {
 
-    boolean createUser(User user);
+    void createUser(User user);
 
     List<User> getUsers();
 

@@ -11,8 +11,7 @@ public class StubUserDataRepository implements UserRepository {
     private List<User> userList = new ArrayList<>();
 
     @Override
-    public boolean createUser(User user) {
-        return false;
+    public void createUser(User user) {
     }
 
     @Override
