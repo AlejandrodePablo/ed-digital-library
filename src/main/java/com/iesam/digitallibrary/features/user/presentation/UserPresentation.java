@@ -2,6 +2,7 @@ package com.iesam.digitallibrary.features.user.presentation;
 
 import com.iesam.digitallibrary.features.user.data.UserDataRepository;
 import com.iesam.digitallibrary.features.user.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.features.user.data.local.UserMemLocalDataSource;
 import com.iesam.digitallibrary.features.user.domain.*;
 
 import java.util.List;
@@ -31,24 +32,34 @@ public class UserPresentation {
         scanner.close();
 
         User newUser = new User(dni, id, name, surname, email, age, telephone);
-        NewUserUseCase newUserUseCase = new NewUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
+        NewUserUseCase newUserUseCase = new NewUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         newUserUseCase.execute(newUser);
     }
 
     public static void getUsers() {
-        ListUsersUseCase listUsersUseCase = new ListUsersUseCase(new UserDataRepository(new UserFileLocalDataSource()));
+        ListUsersUseCase listUsersUseCase = new ListUsersUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         List<User> users = listUsersUseCase.execute();
         System.out.println(users.toString());
     }
 
-    public static void getUser(String id) {
-        GetUserUseCase getUserUseCase = new GetUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
+    public static void getUser() {
+        System.out.println("User ID to list: ");
+        String id = scanner.nextLine();
+
+        GetUserUseCase getUserUseCase = new GetUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         User user = getUserUseCase.execute(id);
-        System.out.println(user.toString());
+
+        if (user != null) {
+            System.out.println(user.toString());
+        } else {
+            System.out.println("User with ID " + id + " does not exist.");
+        }
     }
 
-    public static void deleteUser(String id) {
-        DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
+    public static void deleteUser() {
+        System.out.println("User ID to delete: ");
+        String id = scanner.nextLine();
+        DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         deleteUserUseCase.execute(id);
     }
 
@@ -69,7 +80,7 @@ public class UserPresentation {
         String telephone = scanner.nextLine();
 
         User updatedUser = new User(dni, id, name, surname, email, age, telephone);
-        UpdateUserUseCase updateUserUseCase = new UpdateUserUseCase(new UserDataRepository(new UserFileLocalDataSource()));
+        UpdateUserUseCase updateUserUseCase = new UpdateUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         updateUserUseCase.execute(updatedUser);
     }
 }
