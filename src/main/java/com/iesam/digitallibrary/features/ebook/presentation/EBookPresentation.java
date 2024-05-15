@@ -4,6 +4,7 @@ import com.iesam.digitallibrary.features.ebook.data.EBookDataRepository;
 import com.iesam.digitallibrary.features.ebook.data.local.EBookFileLocalDataSource;
 import com.iesam.digitallibrary.features.ebook.domain.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -50,5 +51,11 @@ public class EBookPresentation {
         } else{
             System.out.println("eBook with ISBN "+isbn+" does not exist");
         }
+    }
+
+    public static void getEbooks(){
+        ListEbooksUseCase listEbooksUseCase = new ListEbooksUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
+        List<EBook> ebooks = listEbooksUseCase.execute();
+        System.out.println(ebooks);
     }
 }
