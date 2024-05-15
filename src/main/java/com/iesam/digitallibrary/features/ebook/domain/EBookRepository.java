@@ -11,4 +11,7 @@ public interface EBookRepository {
     EBook getEBook(String isbn);
 
     List<EBook> getEBooks();
+
+    void updateEBook(EBook eBook);
+
 }
