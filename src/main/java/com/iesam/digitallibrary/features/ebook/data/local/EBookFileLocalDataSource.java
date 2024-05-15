@@ -76,10 +76,8 @@ public class EBookFileLocalDataSource {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                myReader.close();
                 return gson.fromJson(data, typeList);
             }
-            myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Ha ocurrido un error al obtener el listado.");
             e.printStackTrace();

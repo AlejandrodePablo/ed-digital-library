@@ -6,14 +6,15 @@ import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
 
 public class Main {
     public static void main(String[] args) {
-        createUser();
-        getUsers();
-        getUser();
-        updateUser();
-        deleteUser();
+        //createUser();
+        //getUsers();
+        //getUser();
+        //updateUser();
+        //deleteUser();
 
         //createEBook();
-        //deleteEbook();
+        //deleteEBook();
+        getEBook();
     }
 
 
@@ -29,6 +30,7 @@ public class Main {
         UserPresentation.getUser();
     }
 
+
     public static void deleteUser() {
         UserPresentation.deleteUser();
     }
@@ -41,7 +43,11 @@ public class Main {
         EBookPresentation.createEBook();
     }
 
-    public static void deleteEbook() {
+    public static void deleteEBook() {
         EBookPresentation.deleteEBook();
+    }
+
+    public static void getEBook(){
+        EBookPresentation.getEBook();
     }
 }
