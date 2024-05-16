@@ -1,8 +1,6 @@
-package com.iesam.digitallibrary.features.domain;
+package com.iesam.digitallibrary.features.user.domain;
 
-import com.iesam.digitallibrary.features.data.StubUserDataRepository;
-import com.iesam.digitallibrary.features.user.domain.ListUsersUseCase;
-import com.iesam.digitallibrary.features.user.domain.User;
+import com.iesam.digitallibrary.features.user.data.StubUserDataRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
