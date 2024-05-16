@@ -1,4 +1,4 @@
-package com.iesam.digitallibrary.features.data;
+package com.iesam.digitallibrary.features.user.data;
 
 import com.iesam.digitallibrary.features.user.domain.User;
 import com.iesam.digitallibrary.features.user.domain.UserRepository;
