@@ -1,1 +1,1 @@
-[{"id":"01","dni":"11111111A","name":"Alejandro","surname":"dePablo","email":"email@example.com","age":"20","telephone":"91827364"}]
+[{"id":"01","dni":"11111111A","name":"Alejandro","surname":"dePablo","email":"email@example.com","age":"20","telephone":"91827364"},{"id":"02","dni":"2222222B","name":"Angela","surname":"Martinez","email":"AM@email.com","age":"21","telephone":"91234567"},{"id":"03","dni":"33333333C","name":"Carlos","surname":"Martinez","email":"CM@email.com","age":"43","telephone":"987123456"}]

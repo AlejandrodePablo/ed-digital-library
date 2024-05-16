@@ -7,7 +7,7 @@ import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
 
 public class Main {
     public static void main(String[] args) {
-        //createUser();
+        createUser();
         //getUsers();
         //getUser();
         //updateUser();
@@ -19,7 +19,7 @@ public class Main {
         //getEbooks();
         //updateEBook();
 
-        createLoan();
+        //createLoan();
     }
 
 

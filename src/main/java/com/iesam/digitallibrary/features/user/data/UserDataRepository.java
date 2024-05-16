@@ -20,9 +20,9 @@ public class UserDataRepository implements UserRepository {
     }
 
     @Override
-    public boolean createUser(User user) {
-        this.userFileLocalDataSource.save(user);
-        return false;
+    public void createUser(User user) {
+        userFileLocalDataSource.save(user);
+
     }
 
     @Override
