@@ -62,11 +62,10 @@ class GetUserUseCaseTest {
     @Test
     public void givingAnIdNotValidThenReturnNull(){
         //Given
-        String userIdNotValid = "200";
-        Mockito.when(userRepository.getUser("200")).thenReturn(null);
+        Mockito.when(userRepository.getUser("")).thenReturn(null);
 
         //When
-        User userReceived = getUserUseCase.execute("200");
+        User userReceived = getUserUseCase.execute("");
 
         //Then
         Assertions.assertNull(userReceived);
@@ -80,10 +79,10 @@ class GetUserUseCaseTest {
     public void ifUserIdIsNullThenReturnNull(){
         //Given
         String userIdNull = null;
-        Mockito.when(getUserUseCase.execute(null)).thenReturn(null);
+        Mockito.when(getUserUseCase.execute(userIdNull)).thenReturn(null);
 
         //When
-        User userReceived = getUserUseCase.execute(null);
+        User userReceived = getUserUseCase.execute(userIdNull);
 
         //Then
         Assertions.assertNull(userReceived);
