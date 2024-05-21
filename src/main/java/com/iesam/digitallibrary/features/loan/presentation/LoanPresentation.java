@@ -4,6 +4,7 @@ import com.iesam.digitallibrary.features.ebook.domain.EBook;
 import com.iesam.digitallibrary.features.ebook.presentation.EBookPresentation;
 import com.iesam.digitallibrary.features.loan.data.LoanDataRepository;
 import com.iesam.digitallibrary.features.loan.data.local.LoanFileLocalDataSource;
+import com.iesam.digitallibrary.features.loan.domain.DeleteLoanUseCase;
 import com.iesam.digitallibrary.features.loan.domain.ListUnreturnedLoansUseCase;
 import com.iesam.digitallibrary.features.loan.domain.Loan;
 import com.iesam.digitallibrary.features.loan.domain.NewLoanUseCase;
@@ -67,4 +68,12 @@ public class LoanPresentation {
             System.out.println(loan.toString());
         }
     }
+
+    public static void deleteLoan() {
+        System.out.println("ID loan to delete");
+        String id = scanner.nextLine();
+        DeleteLoanUseCase deleteLoanUseCase = new DeleteLoanUseCase(new LoanDataRepository(LoanFileLocalDataSource.getInstance()));
+        deleteLoanUseCase.execute(id);
+    }
+
 }

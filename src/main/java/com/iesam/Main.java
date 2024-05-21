@@ -21,7 +21,8 @@ public class Main {
         //updateEBook();
 
         //createLoan();
-        getUnreturnedLoans();
+        //getUnreturnedLoans();
+        deleteLoan();
     }
 
 
@@ -72,5 +73,8 @@ public class Main {
     }
     public static void getUnreturnedLoans(){
         LoanPresentation.getUnreturnedLoans();
+    }
+    public static void deleteLoan(){
+        LoanPresentation.deleteLoan();
     }
 }

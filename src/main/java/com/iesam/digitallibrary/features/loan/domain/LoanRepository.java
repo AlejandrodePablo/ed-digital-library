@@ -7,4 +7,7 @@ public interface LoanRepository {
     void createLoan(Loan loan);
 
     List<Loan> getLoans();
+
+    void deleteLoan(String id);
+
 }
