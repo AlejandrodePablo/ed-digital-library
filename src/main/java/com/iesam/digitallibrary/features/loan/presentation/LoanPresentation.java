@@ -4,19 +4,24 @@ import com.iesam.digitallibrary.features.ebook.domain.EBook;
 import com.iesam.digitallibrary.features.ebook.presentation.EBookPresentation;
 import com.iesam.digitallibrary.features.loan.data.LoanDataRepository;
 import com.iesam.digitallibrary.features.loan.data.local.LoanFileLocalDataSource;
+import com.iesam.digitallibrary.features.loan.domain.ListUnreturnedLoansUseCase;
 import com.iesam.digitallibrary.features.loan.domain.Loan;
 import com.iesam.digitallibrary.features.loan.domain.NewLoanUseCase;
 import com.iesam.digitallibrary.features.user.domain.User;
 import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
 
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class LoanPresentation {
 
     static Scanner scanner = new Scanner(System.in);
+    static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void createLoan() {
 
@@ -29,31 +34,37 @@ public class LoanPresentation {
         System.out.println("EBook ISBN: ");
         EBook eBook = EBookPresentation.getEBook();
 
-        System.out.println("Loan date (YYYY-MM-DD): ");
-        Date loanDate = readDate();
+        System.out.println("Start date to loan (today): ");
+        Date loanStartDate = generateCurrentDate();
+        String startDate = simpleDateFormat.format(loanStartDate);
 
         System.out.println("Loan return date (YYYY-MM-DD): ");
-        Date loanReturnDate = readDate();
+        Date loanReturnDate = generateDateTenDaysAhead();
+        String returnDate = simpleDateFormat.format(loanReturnDate);
 
-        System.out.println("Loan status");
-        String status = scanner.nextLine();
-
-        Loan newLoan = new Loan(loanId, user, eBook, loanDate, loanReturnDate, status);
-        NewLoanUseCase newLoanUseCase = new NewLoanUseCase(new LoanDataRepository(new LoanFileLocalDataSource()));
+        Loan newLoan = new Loan(loanId, user, eBook, startDate, returnDate);
+        NewLoanUseCase newLoanUseCase = new NewLoanUseCase(new LoanDataRepository(
+                LoanFileLocalDataSource.getInstance()));
         newLoanUseCase.execute(newLoan);
     }
 
-    private static Date readDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        while (date == null) {
-            try {
-                String dateString = scanner.nextLine();
-                date = formatter.parse(dateString);
-            } catch (ParseException e) {
-                System.out.println("Incorrect date format. Please enter the date in the format YYYY-MM-DD: ");
-            }
+    private static Date generateCurrentDate() {
+        LocalDate currentDate = LocalDate.now();
+        return Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    private static Date generateDateTenDaysAhead() {
+        LocalDate futureDate = LocalDate.now().plusDays(10);
+        return Date.from(futureDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static void getUnreturnedLoans() {
+
+        ListUnreturnedLoansUseCase listUnreturnedLoansUseCase = new ListUnreturnedLoansUseCase(new LoanDataRepository(LoanFileLocalDataSource.getInstance()));
+        List<Loan> unreturnedLoans = listUnreturnedLoansUseCase.execute();
+
+        for (Loan loan : unreturnedLoans) {
+            System.out.println(loan.toString());
         }
-        return date;
     }
 }

@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,10 +18,24 @@ import java.util.Scanner;
 
 public class LoanFileLocalDataSource {
 
+    private static LoanFileLocalDataSource instance;
+
+    public LoanFileLocalDataSource() {
+
+    }
+
+    public static LoanFileLocalDataSource getInstance() {
+        if (instance == null) {
+            instance = new LoanFileLocalDataSource();
+        }
+        return instance;
+    }
+
     private final Type typeList = new TypeToken<ArrayList<Loan>>() {
     }.getType();
     private String nameFile = "Loan.txt";
     private Gson gson = new Gson();
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public void update(Loan updatedLoan) {
         List<Loan> loans = findAll();
