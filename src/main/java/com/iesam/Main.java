@@ -1,13 +1,14 @@
 package com.iesam;
 
 import com.iesam.digitallibrary.features.ebook.presentation.EBookPresentation;
+import com.iesam.digitallibrary.features.loan.domain.Loan;
 import com.iesam.digitallibrary.features.loan.presentation.LoanPresentation;
 import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
 
 
 public class Main {
     public static void main(String[] args) {
-        createUser();
+        //createUser();
         //getUsers();
         //getUser();
         //updateUser();
@@ -20,6 +21,7 @@ public class Main {
         //updateEBook();
 
         //createLoan();
+        getUnreturnedLoans();
     }
 
 
@@ -59,6 +61,7 @@ public class Main {
     public static void getEbooks(){
         EBookPresentation.getEbooks();
     }
+
     public static void updateEBook(){
         EBookPresentation.updateEBook();
     }
@@ -66,5 +69,8 @@ public class Main {
 
     public static void createLoan(){
         LoanPresentation.createLoan();
+    }
+    public static void getUnreturnedLoans(){
+        LoanPresentation.getUnreturnedLoans();
     }
 }
