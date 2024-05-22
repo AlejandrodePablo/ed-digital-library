@@ -22,7 +22,8 @@ public class Main {
 
         //createLoan();
         //getUnreturnedLoans();
-        deleteLoan();
+        //deleteLoan();
+        getReturnedLoans();
     }
 
 
@@ -76,5 +77,8 @@ public class Main {
     }
     public static void deleteLoan(){
         LoanPresentation.deleteLoan();
+    }
+    public static void getReturnedLoans(){
+        LoanPresentation.getReturnedLoans();
     }
 }
