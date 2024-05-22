@@ -4,10 +4,7 @@ import com.iesam.digitallibrary.features.ebook.domain.EBook;
 import com.iesam.digitallibrary.features.ebook.presentation.EBookPresentation;
 import com.iesam.digitallibrary.features.loan.data.LoanDataRepository;
 import com.iesam.digitallibrary.features.loan.data.local.LoanFileLocalDataSource;
-import com.iesam.digitallibrary.features.loan.domain.DeleteLoanUseCase;
-import com.iesam.digitallibrary.features.loan.domain.ListUnreturnedLoansUseCase;
-import com.iesam.digitallibrary.features.loan.domain.Loan;
-import com.iesam.digitallibrary.features.loan.domain.NewLoanUseCase;
+import com.iesam.digitallibrary.features.loan.domain.*;
 import com.iesam.digitallibrary.features.user.domain.User;
 import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
 
@@ -55,7 +52,7 @@ public class LoanPresentation {
     }
 
     private static Date generateDateTenDaysAhead() {
-        LocalDate futureDate = LocalDate.now().plusDays(10);
+        LocalDate futureDate = LocalDate.now().plusDays(1);
         return Date.from(futureDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
@@ -65,6 +62,7 @@ public class LoanPresentation {
         List<Loan> unreturnedLoans = listUnreturnedLoansUseCase.execute();
 
         for (Loan loan : unreturnedLoans) {
+            System.out.println("Unreturned loans");
             System.out.println(loan.toString());
         }
     }
@@ -74,6 +72,16 @@ public class LoanPresentation {
         String id = scanner.nextLine();
         DeleteLoanUseCase deleteLoanUseCase = new DeleteLoanUseCase(new LoanDataRepository(LoanFileLocalDataSource.getInstance()));
         deleteLoanUseCase.execute(id);
+    }
+
+    public static void getReturnedLoans() {
+        ListReturnedLoansUseCase listReturnedLoansUseCase = new ListReturnedLoansUseCase(new LoanDataRepository(LoanFileLocalDataSource.getInstance()));
+        List<Loan> returnedLoans = listReturnedLoansUseCase.execute();
+
+        for (Loan loan : returnedLoans) {
+            System.out.println("Returned loans");
+            System.out.println(loan.toString());
+        }
     }
 
 }
