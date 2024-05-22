@@ -22,4 +22,9 @@ public class LoanDataRepository implements LoanRepository {
     public List<Loan> getLoans() {
         return loanFileLocalDataSource.findAll();
     }
+
+    @Override
+    public void deleteLoan(String id) {
+        this.loanFileLocalDataSource.delete(id);
+    }
 }
