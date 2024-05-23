@@ -78,6 +78,7 @@ public class EBookPresentation {
 
     public static EBook getEBook() {
         System.out.println("eBook ISBN to list: ");
+        scanner.nextLine();
         String isbn = scanner.nextLine();
 
         GetEBookUseCase getEBookUseCase = new GetEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
