@@ -1,6 +1,8 @@
-package com.iesam.digitallibrary.features.ebook.domain;
+package com.iesam.digitallibrary.features.digitalresource.ebook.domain;
 
-import com.iesam.digitallibrary.features.user.domain.User;
+import com.iesam.digitallibrary.features.digitalresource.ebook.domain.EBook;
+import com.iesam.digitallibrary.features.digitalresource.ebook.domain.EBookRepository;
+import com.iesam.digitallibrary.features.digitalresource.ebook.domain.ListEbooksUseCase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,8 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ListEbooksUseCaseTest {

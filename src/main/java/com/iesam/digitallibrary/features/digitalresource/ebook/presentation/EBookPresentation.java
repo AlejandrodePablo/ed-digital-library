@@ -1,8 +1,9 @@
-package com.iesam.digitallibrary.features.ebook.presentation;
+package com.iesam.digitallibrary.features.digitalresource.ebook.presentation;
 
-import com.iesam.digitallibrary.features.ebook.data.EBookDataRepository;
-import com.iesam.digitallibrary.features.ebook.data.local.EBookFileLocalDataSource;
-import com.iesam.digitallibrary.features.ebook.domain.*;
+import com.iesam.digitallibrary.features.digitalresource.ebook.domain.*;
+import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
+import com.iesam.digitallibrary.features.digitalresource.ebook.data.local.EBookFileLocalDataSource;
+
 
 import java.util.List;
 import java.util.Scanner;
