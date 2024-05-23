@@ -80,6 +80,7 @@ public class UserPresentation {
 
     public static User getUser() {
         System.out.println("User ID to list: ");
+        scanner.nextLine();
         String id = scanner.nextLine();
 
         GetUserUseCase getUserUseCase = new GetUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
@@ -95,7 +96,6 @@ public class UserPresentation {
 
     public static void deleteUser() {
         System.out.println("User ID to delete: ");
-        scanner.nextLine();
         String id = scanner.nextLine();
         DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         deleteUserUseCase.execute(id);
