@@ -5,80 +5,41 @@ import com.iesam.digitallibrary.features.loan.domain.Loan;
 import com.iesam.digitallibrary.features.loan.presentation.LoanPresentation;
 import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
 
+import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
-        //createUser();
-        //getUsers();
-        //getUser();
-        //updateUser();
-        //deleteUser();
-
-        //createEBook();
-        //deleteEBook();
-        //getEBook();
-        //getEbooks();
-        //updateEBook();
-
-        //createLoan();
-        //getUnreturnedLoans();
-        //deleteLoan();
-        getReturnedLoans();
-    }
-
-
-    public static void createUser() {
-        UserPresentation.createUser();
-    }
-
-    public static void getUsers() {
-        UserPresentation.getUsers();
-    }
-
-    public static void getUser() {
-        UserPresentation.getUser();
-    }
-
-    public static void deleteUser() {
-        UserPresentation.deleteUser();
-    }
-
-    public static void updateUser() {
-        UserPresentation.updateUser();
-    }
-
-
-    public static void createEBook() {
-        EBookPresentation.createEBook();
-    }
-
-    public static void deleteEBook() {
-        EBookPresentation.deleteEBook();
-    }
-
-    public static void getEBook(){
-        EBookPresentation.getEBook();
-    }
-
-    public static void getEbooks(){
-        EBookPresentation.getEbooks();
-    }
-
-    public static void updateEBook(){
-        EBookPresentation.updateEBook();
-    }
-
-
-    public static void createLoan(){
-        LoanPresentation.createLoan();
-    }
-    public static void getUnreturnedLoans(){
-        LoanPresentation.getUnreturnedLoans();
-    }
-    public static void deleteLoan(){
-        LoanPresentation.deleteLoan();
-    }
-    public static void getReturnedLoans(){
-        LoanPresentation.getReturnedLoans();
+        Scanner scanner = new Scanner(System.in);
+        int opcion;
+        do {
+            System.out.println("Menú Principal:");
+            System.out.println("1. Gestionar Usuarios");
+            System.out.println("2. Gestionar eBooks");
+            System.out.println("3. Gestionar Préstamos");
+            System.out.println("4. Salir");
+            System.out.print("Ingrese su opción: ");
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    UserPresentation userPresentation = new UserPresentation();
+                    userPresentation.showUserMenu();
+                    break;
+                case 2:
+                    EBookPresentation ebookPresentation = new EBookPresentation();
+                    ebookPresentation.showEbookMenu();
+                    break;
+                case 3:
+                    LoanPresentation loanPresentation = new LoanPresentation();
+                    loanPresentation.showLoanMenu();
+                    break;
+                case 4:
+                    System.out.println("Saliendo del programa...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
+            }
+        } while (opcion != 4);
+        scanner.close();
     }
 }

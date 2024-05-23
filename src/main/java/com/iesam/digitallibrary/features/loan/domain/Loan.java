@@ -18,4 +18,15 @@ public class Loan {
         this.startDate = startDate;
         this.returnDate = returnDate;
     }
+
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "loanId='" + loanId + '\'' +
+                ", userid=" + userid +
+                ", eBookIsbn=" + eBookIsbn +
+                ", startDate='" + startDate + '\'' +
+                ", returnDate='" + returnDate + '\'' +
+                '}';
+    }
 }

@@ -18,6 +18,40 @@ import java.util.Scanner;
 
 public class LoanPresentation {
 
+    public void showLoanMenu() {
+        int opcion;
+        do {
+            System.out.println("Menu de Gestión de prestamos:");
+            System.out.println("1. Agregar prestamos");
+            System.out.println("2. Eliminar prestamo");
+            System.out.println("3. Mostrar Todos los prestamos activos");
+            System.out.println("4. Mostrar todos los prestamos finalizados");
+            System.out.println("5. Volver al Menú Principal");
+            System.out.print("Ingrese su opción: ");
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    createLoan();
+                    break;
+                case 2:
+                    deleteLoan();
+                    break;
+                case 3:
+                    getUnreturnedLoans();
+                    break;
+                case 4:
+                    getReturnedLoans();
+                    break;
+                case 5:
+                    System.out.println("Volviendo al Menú Principal...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
+            }
+        } while (opcion != 5);
+    }
+
+
     static Scanner scanner = new Scanner(System.in);
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

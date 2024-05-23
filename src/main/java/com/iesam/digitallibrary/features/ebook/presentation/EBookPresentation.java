@@ -12,6 +12,43 @@ public class EBookPresentation {
 
     static Scanner scanner = new Scanner(System.in);
 
+    public void showEbookMenu() {
+        int opcion;
+        do {
+            System.out.println("Menú de Gestión de eBook:");
+            System.out.println("1. Agregar eBook");
+            System.out.println("2. Eliminar eBook");
+            System.out.println("3. Mostrar Todos los eBook");
+            System.out.println("4. Mostrar eBook por ISBN");
+            System.out.println("5. Actualizar un eBook");
+            System.out.println("6. Volver al Menú Principal");
+            System.out.print("Ingrese su opción: ");
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    createEBook();
+                    break;
+                case 2:
+                    deleteEBook();
+                    break;
+                case 3:
+                    getEbooks();
+                    break;
+                case 4:
+                    getEBook();
+                    break;
+                case 5:
+                    updateEBook();
+                case 6:
+                    System.out.println("Volviendo al Menú Principal...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
+            }
+        } while (opcion != 6);
+    }
+
+
     public static void createEBook() {
 
         System.out.println("ISBN: ");
@@ -41,6 +78,7 @@ public class EBookPresentation {
 
     public static EBook getEBook() {
         System.out.println("eBook ISBN to list: ");
+        scanner.nextLine();
         String isbn = scanner.nextLine();
 
         GetEBookUseCase getEBookUseCase = new GetEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));

@@ -19,4 +19,17 @@ public class User {
         this.age = age;
         this.telephone = telephone;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", dni='" + dni + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", age='" + age + '\'' +
+                ", telephone='" + telephone + '\'' +
+                '}';
+    }
 }
