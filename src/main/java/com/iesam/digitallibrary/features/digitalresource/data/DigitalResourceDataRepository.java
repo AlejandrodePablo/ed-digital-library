@@ -8,8 +8,9 @@ public class DigitalResourceDataRepository implements DigitalResourceRepository 
 
     DigitalResourceFileLocalDataSource dRLocal = new DigitalResourceFileLocalDataSource();
 
+
     @Override
-    public void createDigitalResource(DigitalResource digitalResource) {
-        dRLocal.save(digitalResource);
+    public void getDigitalResources() {
+
     }
 }

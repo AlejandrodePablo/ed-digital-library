@@ -8,9 +8,10 @@ import java.util.List;
 
 public class EBookDataRepository implements EBookRepository {
 
-    EBookFileLocalDataSource eBookFileLocalDataSource = new EBookFileLocalDataSource();
+    private final EBookFileLocalDataSource eBookFileLocalDataSource;
 
     public EBookDataRepository(EBookFileLocalDataSource eBookFileLocalDataSource) {
+        this.eBookFileLocalDataSource = eBookFileLocalDataSource;
     }
 
     @Override

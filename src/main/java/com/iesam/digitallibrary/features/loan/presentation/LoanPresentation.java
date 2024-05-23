@@ -1,14 +1,12 @@
 package com.iesam.digitallibrary.features.loan.presentation;
 
-import com.iesam.digitallibrary.features.digitalresource.ebook.domain.EBook;
-import com.iesam.digitallibrary.features.digitalresource.ebook.presentation.EBookPresentation;
+import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
+import com.iesam.digitallibrary.features.digitalresource.ebook.data.local.EBookFileLocalDataSource;
 import com.iesam.digitallibrary.features.loan.data.LoanDataRepository;
 import com.iesam.digitallibrary.features.loan.data.local.LoanFileLocalDataSource;
 import com.iesam.digitallibrary.features.loan.domain.*;
-import com.iesam.digitallibrary.features.user.domain.User;
-import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
-
-
+import com.iesam.digitallibrary.features.user.data.UserDataRepository;
+import com.iesam.digitallibrary.features.user.data.local.UserFileLocalDataSource;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -58,26 +56,38 @@ public class LoanPresentation {
     public static void createLoan() {
 
         System.out.println("Loan ID: ");
+        scanner.nextLine();
         String loanId = scanner.nextLine();
 
         System.out.println("User ID: ");
-        User user = UserPresentation.getUser();
+        String userId = scanner.nextLine();
 
         System.out.println("EBook ISBN: ");
-        EBook eBook = EBookPresentation.getEBook();
+        String eBookIsbn = scanner.nextLine();
 
-        System.out.println("Start date to loan (today): ");
         Date loanStartDate = generateCurrentDate();
         String startDate = simpleDateFormat.format(loanStartDate);
 
-        System.out.println("Loan return date (YYYY-MM-DD): ");
+
         Date loanReturnDate = generateDateTenDaysAhead();
         String returnDate = simpleDateFormat.format(loanReturnDate);
 
-        Loan newLoan = new Loan(loanId, user, eBook, startDate, returnDate);
-        NewLoanUseCase newLoanUseCase = new NewLoanUseCase(new LoanDataRepository(
-                LoanFileLocalDataSource.getInstance()));
-        newLoanUseCase.execute(newLoan);
+        NewLoanUseCase newLoanUseCase = new NewLoanUseCase(
+
+                new LoanDataRepository(LoanFileLocalDataSource.getInstance()),
+                new UserDataRepository(UserFileLocalDataSource.getInstance()),
+                new EBookDataRepository(EBookFileLocalDataSource.getInstance())
+
+        );
+
+        boolean success = newLoanUseCase.execute(loanId, userId, eBookIsbn, startDate, returnDate);
+
+        if (success) {
+            System.out.println("Loan created successfully.");
+        } else {
+            System.out.println("Error: User or eBook not found.");
+        }
+
     }
 
     private static Date generateCurrentDate() {

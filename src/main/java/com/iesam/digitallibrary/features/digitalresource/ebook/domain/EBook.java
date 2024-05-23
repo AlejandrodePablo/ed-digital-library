@@ -14,7 +14,7 @@ public class EBook extends DigitalResource {
     @Override
     public String toString() {
         return "EBook{" +
-                "isbn='" + id + '\'' + // Usa id de la superclase que es el isbn
+                "isbn='" + isbn + '\'' + // Usa id de la superclase que es el isbn
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", genre='" + genre + '\'' +
