@@ -11,6 +11,43 @@ public class UserPresentation {
 
     static Scanner scanner = new Scanner(System.in);
 
+    public void showUserMenu() {
+        int opcion;
+        do {
+            System.out.println("Menú de Gestión de Usuarios:");
+            System.out.println("1. Agregar Usuario");
+            System.out.println("2. Eliminar Usuario");
+            System.out.println("3. Mostrar Todos los Usuarios");
+            System.out.println("4. Mostrar Usuario por ID");
+            System.out.println("5. Actualizar un Usuario");
+            System.out.println("6. Volver al Menú Principal");
+            System.out.print("Ingrese su opción: ");
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    createUser();
+                    break;
+                case 2:
+                    deleteUser();
+                    break;
+                case 3:
+                    getUsers();
+                    break;
+                case 4:
+                    getUser();
+                    break;
+                case 5:
+                    updateUser();
+                case 6:
+                    System.out.println("Volviendo al Menú Principal...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
+            }
+        } while (opcion != 6);
+        scanner.close();
+    }
+
     public static void createUser() {
 
         System.out.println("ID: ");

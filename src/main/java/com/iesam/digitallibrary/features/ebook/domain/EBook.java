@@ -17,4 +17,16 @@ public class EBook {
         this.publicationYear = publicationYear;
         this.language = language;
     }
+
+    @Override
+    public String toString() {
+        return "EBook{" +
+                "isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", publicationYear='" + publicationYear + '\'' +
+                ", language='" + language + '\'' +
+                '}';
+    }
 }
