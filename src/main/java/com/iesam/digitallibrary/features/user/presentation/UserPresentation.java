@@ -45,7 +45,6 @@ public class UserPresentation {
                     System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
             }
         } while (opcion != 6);
-        scanner.close();
     }
 
     public static void createUser() {
