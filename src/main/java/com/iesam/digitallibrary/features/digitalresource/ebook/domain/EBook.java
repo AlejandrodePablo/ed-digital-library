@@ -1,27 +1,20 @@
-package com.iesam.digitallibrary.features.ebook.domain;
+package com.iesam.digitallibrary.features.digitalresource.ebook.domain;
 
-public class EBook {
+import com.iesam.digitallibrary.features.digitalresource.domain.DigitalResource;
 
-    public final String isbn;
-    public final String title;
-    public final String author;
-    public final String genre;
-    public final String publicationYear;
+public class EBook extends DigitalResource {
+
     public final String language;
 
     public EBook(String isbn, String title, String author, String genre, String publicationYear, String language) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.publicationYear = publicationYear;
+        super(isbn, title, author, genre, publicationYear); // Usa el isbn como id
         this.language = language;
     }
 
     @Override
     public String toString() {
         return "EBook{" +
-                "isbn='" + isbn + '\'' +
+                "isbn='" + id + '\'' + // Usa id de la superclase que es el isbn
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", genre='" + genre + '\'' +

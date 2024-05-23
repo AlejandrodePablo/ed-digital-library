@@ -1,8 +1,8 @@
-package com.iesam.digitallibrary.features.ebook.data.local;
+package com.iesam.digitallibrary.features.digitalresource.ebook.data.local;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.iesam.digitallibrary.features.ebook.domain.EBook;
+import com.iesam.digitallibrary.features.digitalresource.ebook.domain.EBook;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,14 +25,14 @@ public class EBookFileLocalDataSource {
         List<EBook> EBooks = findAll();
         for (int i = 0; i < EBooks.size(); i++) {
             EBook EBook = EBooks.get(i);
-            if (EBook.isbn.equals(updatedEBook.isbn)) {
+            if (EBook.id.equals(updatedEBook.id)) {
                 EBooks.set(i, updatedEBook);
                 saveToFile(EBooks);
                 System.out.println("Usuario actualizado correctamente");
                 return;
             }
         }
-        System.out.println("el usuario con ID " + updatedEBook.isbn + "no existe");
+        System.out.println("el usuario con ID " + updatedEBook.id + "no existe");
     }
 
     public void save(EBook model) {
@@ -60,7 +60,7 @@ public class EBookFileLocalDataSource {
     public EBook findById(String id) {
         List<EBook> models = findAll();
         for (EBook model : models) {
-            if (Objects.equals(model.isbn, id)) {
+            if (Objects.equals(model.id, id)) {
                 return model;
             }
         }
@@ -92,7 +92,7 @@ public class EBookFileLocalDataSource {
         List<EBook> newList = new ArrayList<>();
         List<EBook> models = findAll();
         for (EBook model : models) {
-            if (!model.isbn.equals(modelId)) {
+            if (!model.id.equals(modelId)) {
                 newList.add(model);
             }
         }

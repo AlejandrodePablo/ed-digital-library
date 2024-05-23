@@ -1,7 +1,7 @@
 package com.iesam.digitallibrary.features.loan.presentation;
 
-import com.iesam.digitallibrary.features.ebook.domain.EBook;
-import com.iesam.digitallibrary.features.ebook.presentation.EBookPresentation;
+import com.iesam.digitallibrary.features.digitalresource.ebook.domain.EBook;
+import com.iesam.digitallibrary.features.digitalresource.ebook.presentation.EBookPresentation;
 import com.iesam.digitallibrary.features.loan.data.LoanDataRepository;
 import com.iesam.digitallibrary.features.loan.data.local.LoanFileLocalDataSource;
 import com.iesam.digitallibrary.features.loan.domain.*;

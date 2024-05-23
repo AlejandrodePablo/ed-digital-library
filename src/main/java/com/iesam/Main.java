@@ -1,7 +1,8 @@
 package com.iesam;
 
-import com.iesam.digitallibrary.features.ebook.presentation.EBookPresentation;
-import com.iesam.digitallibrary.features.loan.domain.Loan;
+import com.iesam.digitallibrary.features.digitalresource.domain.DigitalResource;
+import com.iesam.digitallibrary.features.digitalresource.ebook.presentation.EBookPresentation;
+import com.iesam.digitallibrary.features.digitalresource.presentation.DigitalResourcePresentation;
 import com.iesam.digitallibrary.features.loan.presentation.LoanPresentation;
 import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
 
@@ -15,7 +16,7 @@ public class Main {
         do {
             System.out.println("Menú Principal:");
             System.out.println("1. Gestionar Usuarios");
-            System.out.println("2. Gestionar eBooks");
+            System.out.println("2. Gestionar Recursos Digitales");
             System.out.println("3. Gestionar Préstamos");
             System.out.println("4. Salir");
             System.out.print("Ingrese su opción: ");
@@ -26,8 +27,8 @@ public class Main {
                     userPresentation.showUserMenu();
                     break;
                 case 2:
-                    EBookPresentation ebookPresentation = new EBookPresentation();
-                    ebookPresentation.showEbookMenu();
+                    DigitalResourcePresentation digitalResourcePresentation = new DigitalResourcePresentation();
+                    digitalResourcePresentation.showDResourceMenu();
                     break;
                 case 3:
                     LoanPresentation loanPresentation = new LoanPresentation();

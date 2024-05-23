@@ -1,4 +1,4 @@
-package com.iesam.digitallibrary.features.ebook.domain;
+package com.iesam.digitallibrary.features.digitalresource.ebook.domain;
 
 public class UpdateEBookUseCase {
     private EBookRepository eBookRepository;

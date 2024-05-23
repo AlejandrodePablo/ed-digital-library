@@ -1,6 +1,6 @@
 package com.iesam.digitallibrary.features.loan.domain;
 
-import com.iesam.digitallibrary.features.ebook.domain.EBook;
+import com.iesam.digitallibrary.features.digitalresource.ebook.domain.EBook;
 import com.iesam.digitallibrary.features.user.domain.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,9 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class NewLoanUseCaseTest {
