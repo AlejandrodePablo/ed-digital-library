@@ -1,5 +1,7 @@
 package com.iesam.digitallibrary.features.digitalresource.presentation;
 
+import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.Audiobook;
+import com.iesam.digitallibrary.features.digitalresource.audiobook.presentation.AudiobookPresentation;
 import com.iesam.digitallibrary.features.digitalresource.ebook.presentation.EBookPresentation;
 
 import java.util.Scanner;
@@ -23,7 +25,8 @@ public class DigitalResourcePresentation {
                     eBookPresentation.showEbookMenu();
                     break;
                 case 2:
-                    //showAudiobookMenu();
+                    AudiobookPresentation audiobookPresentation = new AudiobookPresentation();
+                    audiobookPresentation.showAudiobookMenu();
                     break;
                 case 3:
                     //getDigitalResources();
