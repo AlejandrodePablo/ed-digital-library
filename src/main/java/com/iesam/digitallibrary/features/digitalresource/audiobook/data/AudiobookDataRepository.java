@@ -4,6 +4,8 @@ import com.iesam.digitallibrary.features.digitalresource.audiobook.data.local.Au
 import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.Audiobook;
 import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.AudiobookRepository;
 
+import java.util.List;
+
 public class AudiobookDataRepository implements AudiobookRepository {
 
     private final AudiobookFileLocalDataSource audiobookFileLocalDataSource;
@@ -15,5 +17,15 @@ public class AudiobookDataRepository implements AudiobookRepository {
     @Override
     public void createAudiobook(Audiobook audiobook) {
         audiobookFileLocalDataSource.save(audiobook);
+    }
+
+    @Override
+    public List<Audiobook> getAudiobooks() {
+        return audiobookFileLocalDataSource.findAll();
+    }
+
+    @Override
+    public Audiobook getAudiobook(String isbn) {
+        return audiobookFileLocalDataSource.findById(isbn);
     }
 }

@@ -2,11 +2,11 @@ package com.iesam.digitallibrary.features.digitalresource.audiobook.presentation
 
 import com.iesam.digitallibrary.features.digitalresource.audiobook.data.AudiobookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.audiobook.data.local.AudiobookFileLocalDataSource;
-import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.Audiobook;
-import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.NewAudiobookUseCase;
+import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.*;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.local.EBookFileLocalDataSource;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class AudiobookPresentation {
@@ -18,16 +18,23 @@ public class AudiobookPresentation {
         do {
             System.out.println("Menú de Gestión de Audiobook:");
             System.out.println("1. Agregar Audiobook");
-            System.out.println("6. Volver al Menú Principal");
+            System.out.println("2. Mostrar todos los Audiobook");
+            System.out.println("3. Mostrar Audiobook por ISBN");
+            System.out.println("6. Volver al Menú de Gestion de Recursos Digitales");
             System.out.print("Ingrese su opción: ");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
                     createAudiobook();
                     break;
-
+                case 2:
+                    getAudiobooks();
+                    break;
+                case 3:
+                    getAudiobook();
+                    break;
                 case 6:
-                    System.out.println("Volviendo al Menú Principal...");
+                    System.out.println("Volviendo al Menú de Recursos Digitales...");
                     break;
                 default:
                     System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
@@ -55,4 +62,24 @@ public class AudiobookPresentation {
         newAudiobookUseCase.execute(newAudiobook);
     }
 
+    public static void getAudiobooks(){
+        ListAudiobooksUseCase listAudiobooksUseCase = new ListAudiobooksUseCase(new AudiobookDataRepository(new AudiobookFileLocalDataSource()));
+        List<Audiobook> audiobooks = listAudiobooksUseCase.execute();
+        System.out.println(audiobooks);
+    }
+
+    public static Audiobook getAudiobook(){
+        System.out.println("ISBN of Audiobook to list: ");
+        scanner.nextLine();
+        String isbn = scanner.nextLine();
+
+        GetAudiobookUseCase getAudiobookUseCase = new GetAudiobookUseCase(new AudiobookDataRepository(new AudiobookFileLocalDataSource()));
+        try{Audiobook audiobook = getAudiobookUseCase.execute(isbn);
+            System.out.println(audiobook);
+            return audiobook;
+        } catch (AudiobookNotFoundException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

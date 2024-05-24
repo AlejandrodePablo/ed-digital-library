@@ -76,16 +76,16 @@ class GetEBookUseCaseTest {
     @Test
     public void testGetEBookCallsRepository() {
         // Given
-        String eBookId = "123";
-        EBook expectedEBook = new EBook(eBookId, "Title", "Author", "Fiction", "2024", "English");
-        Mockito.when(eBookRepository.getEBook(eBookId)).thenReturn(expectedEBook);
+        String eBookIsbn = "123";
+        EBook expectedEBook = new EBook(eBookIsbn, "Title", "Author", "Fiction", "2024", "English");
+        Mockito.when(eBookRepository.getEBook(eBookIsbn)).thenReturn(expectedEBook);
 
         // When
-        EBook eBook = getEBookUseCase.execute(eBookId);
+        EBook eBookReceived = getEBookUseCase.execute(eBookIsbn);
 
         // Then
-        Mockito.verify(eBookRepository, Mockito.times(1)).getEBook(eBookId);
-        Assertions.assertEquals(expectedEBook, eBook);
+        Mockito.verify(eBookRepository, Mockito.times(1)).getEBook(eBookIsbn);
+        Assertions.assertEquals(expectedEBook, eBookReceived);
     }
 
 }
