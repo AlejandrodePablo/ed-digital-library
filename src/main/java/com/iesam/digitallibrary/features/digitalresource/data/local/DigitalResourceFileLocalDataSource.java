@@ -30,14 +30,14 @@ public class DigitalResourceFileLocalDataSource {
         List<DigitalResource> DigitalResources = findAll();
         for (int i = 0; i < DigitalResources.size(); i++) {
             DigitalResource DigitalResource = DigitalResources.get(i);
-            if (DigitalResource.id.equals(updatedDigitalResource.id)) {
+            if (DigitalResource.isbn.equals(updatedDigitalResource.isbn)) {
                 DigitalResources.set(i, updatedDigitalResource);
                 saveToFile(DigitalResources);
                 System.out.println("Usuario actualizado correctamente");
                 return;
             }
         }
-        System.out.println("el usuario con ID " + updatedDigitalResource.id + "no existe");
+        System.out.println("el usuario con ID " + updatedDigitalResource.isbn + "no existe");
     }
 
     public void save(DigitalResource model) {
@@ -65,7 +65,7 @@ public class DigitalResourceFileLocalDataSource {
     public DigitalResource findById(String id) {
         List<DigitalResource> models = findAll();
         for (DigitalResource model : models) {
-            if (Objects.equals(model.id, id)) {
+            if (Objects.equals(model.isbn, id)) {
                 return model;
             }
         }
@@ -99,7 +99,7 @@ public class DigitalResourceFileLocalDataSource {
         List<DigitalResource> newList = new ArrayList<>();
         List<DigitalResource> models = findAll();
         for (DigitalResource model : models) {
-            if (!model.id.equals(modelId)) {
+            if (!model.isbn.equals(modelId)) {
                 newList.add(model);
             }
         }

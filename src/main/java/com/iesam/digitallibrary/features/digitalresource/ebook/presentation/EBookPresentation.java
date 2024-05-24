@@ -66,14 +66,14 @@ public class EBookPresentation {
         String language = scanner.nextLine();
 
         EBook newEBook = new EBook(isbn, title, author, genre, publicationYear, language);
-        NewEBookUseCase newEBookUseCase = new NewEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
+        NewEBookUseCase newEBookUseCase = new NewEBookUseCase(new EBookDataRepository(EBookFileLocalDataSource.getInstance()));
         newEBookUseCase.execute(newEBook);
     }
 
     public static void deleteEBook() {
         System.out.println("eBook ISBN to delete: ");
         String isbn = scanner.nextLine();
-        DeleteEBookUseCase deleteEBookUseCase = new DeleteEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
+        DeleteEBookUseCase deleteEBookUseCase = new DeleteEBookUseCase(new EBookDataRepository(EBookFileLocalDataSource.getInstance()));
         deleteEBookUseCase.execute(isbn);
     }
 
@@ -82,7 +82,8 @@ public class EBookPresentation {
         scanner.nextLine();
         String isbn = scanner.nextLine();
 
-        GetEBookUseCase getEBookUseCase = new GetEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
+        GetEBookUseCase getEBookUseCase = new GetEBookUseCase(new EBookDataRepository(EBookFileLocalDataSource.getInstance()
+        ));
         EBook eBook = getEBookUseCase.execute(isbn);
 
         if (eBook != null) {
@@ -94,7 +95,7 @@ public class EBookPresentation {
     }
 
     public static void getEbooks() {
-        ListEbooksUseCase listEbooksUseCase = new ListEbooksUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
+        ListEbooksUseCase listEbooksUseCase = new ListEbooksUseCase(new EBookDataRepository(EBookFileLocalDataSource.getInstance()));
         List<EBook> ebooks = listEbooksUseCase.execute();
         System.out.println(ebooks);
     }
@@ -114,7 +115,7 @@ public class EBookPresentation {
         String language = scanner.nextLine();
 
         EBook updatedEBook = new EBook(isbn, title, author, genre, publicationYear, language);
-        UpdateEBookUseCase updateEBookUseCase = new UpdateEBookUseCase(new EBookDataRepository(new EBookFileLocalDataSource()));
+        UpdateEBookUseCase updateEBookUseCase = new UpdateEBookUseCase(new EBookDataRepository(EBookFileLocalDataSource.getInstance()));
         updateEBookUseCase.execute(updatedEBook);
     }
 }

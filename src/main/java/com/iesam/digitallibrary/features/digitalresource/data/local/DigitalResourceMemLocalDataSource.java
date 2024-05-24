@@ -26,7 +26,7 @@ public class DigitalResourceMemLocalDataSource {
     }
 
     public void save(DigitalResource model) {
-        dataStore.put(model.id, model);
+        dataStore.put(model.isbn, model);
     }
 
     public void saveList(List<DigitalResource> models) {
@@ -48,11 +48,11 @@ public class DigitalResourceMemLocalDataSource {
     }
 
     public void update(DigitalResource updatedDigitalResource) {
-        if (dataStore.containsKey(updatedDigitalResource.id)) {
-            dataStore.put(updatedDigitalResource.id, updatedDigitalResource);
+        if (dataStore.containsKey(updatedDigitalResource.isbn)) {
+            dataStore.put(updatedDigitalResource.isbn, updatedDigitalResource);
             System.out.println("DigitalResource updated successfully");
         } else {
-            System.out.println("DigitalResource with ID" + updatedDigitalResource.id + " does not exist");
+            System.out.println("DigitalResource with ID" + updatedDigitalResource.isbn + " does not exist");
         }
     }
 
