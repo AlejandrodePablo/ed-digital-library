@@ -9,6 +9,10 @@ public class GetAudiobookUseCase {
     }
 
     public Audiobook execute(String isbn) {
-        return this.audiobookRepository.getAudiobook(isbn);
+        Audiobook audiobook = this.audiobookRepository.getAudiobook(isbn);
+        if (audiobook == null) {
+            throw new AudiobookNotFoundException("Audiobook with ISBN " + isbn + " does not exist");
+        }
+        return audiobook;
     }
 }

@@ -2,10 +2,7 @@ package com.iesam.digitallibrary.features.digitalresource.audiobook.presentation
 
 import com.iesam.digitallibrary.features.digitalresource.audiobook.data.AudiobookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.audiobook.data.local.AudiobookFileLocalDataSource;
-import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.Audiobook;
-import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.GetAudiobookUseCase;
-import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.ListAudiobooksUseCase;
-import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.NewAudiobookUseCase;
+import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.*;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.local.EBookFileLocalDataSource;
 
@@ -23,7 +20,7 @@ public class AudiobookPresentation {
             System.out.println("1. Agregar Audiobook");
             System.out.println("2. Mostrar todos los Audiobook");
             System.out.println("3. Mostrar Audiobook por ISBN");
-            System.out.println("6. Volver al Menú Principal");
+            System.out.println("6. Volver al Menú de Gestion de Recursos Digitales");
             System.out.print("Ingrese su opción: ");
             opcion = scanner.nextInt();
             switch (opcion) {
@@ -37,7 +34,7 @@ public class AudiobookPresentation {
                     getAudiobook();
                     break;
                 case 6:
-                    System.out.println("Volviendo al Menú Principal...");
+                    System.out.println("Volviendo al Menú de Recursos Digitales...");
                     break;
                 default:
                     System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
@@ -77,13 +74,12 @@ public class AudiobookPresentation {
         String isbn = scanner.nextLine();
 
         GetAudiobookUseCase getAudiobookUseCase = new GetAudiobookUseCase(new AudiobookDataRepository(new AudiobookFileLocalDataSource()));
-        Audiobook audiobook = getAudiobookUseCase.execute(isbn);
-
-        if (audiobook != null) {
+        try{Audiobook audiobook = getAudiobookUseCase.execute(isbn);
             System.out.println(audiobook);
-        } else {
-            System.out.println("eBook with ISBN " + isbn + " does not exist");
+            return audiobook;
+        } catch (AudiobookNotFoundException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
-        return audiobook;
     }
 }

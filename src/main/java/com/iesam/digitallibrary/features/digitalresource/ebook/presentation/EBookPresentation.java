@@ -22,7 +22,7 @@ public class EBookPresentation {
             System.out.println("3. Mostrar Todos los eBook");
             System.out.println("4. Mostrar eBook por ISBN");
             System.out.println("5. Actualizar un eBook");
-            System.out.println("6. Volver al Menú Principal");
+            System.out.println("6. Volver al de Gestion de Recursos Digitales");
             System.out.print("Ingrese su opción: ");
             opcion = scanner.nextInt();
             switch (opcion) {
@@ -41,7 +41,7 @@ public class EBookPresentation {
                 case 5:
                     updateEBook();
                 case 6:
-                    System.out.println("Volviendo al Menú Principal...");
+                    System.out.println("Volviendo al Menú de Recursos Digitales...");
                     break;
                 default:
                     System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
