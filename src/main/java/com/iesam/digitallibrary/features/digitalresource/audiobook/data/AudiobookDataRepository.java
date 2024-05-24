@@ -28,4 +28,14 @@ public class AudiobookDataRepository implements AudiobookRepository {
     public Audiobook getAudiobook(String isbn) {
         return audiobookFileLocalDataSource.findById(isbn);
     }
+
+    @Override
+    public void deleteAudiobook(String isbn) {
+        audiobookFileLocalDataSource.delete(isbn);
+    }
+
+    @Override
+    public void updateAudiobook(Audiobook audiobook) {
+        audiobookFileLocalDataSource.update(audiobook);
+    }
 }

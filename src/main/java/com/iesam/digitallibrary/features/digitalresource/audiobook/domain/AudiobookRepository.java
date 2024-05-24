@@ -10,4 +10,8 @@ public interface AudiobookRepository {
 
     Audiobook getAudiobook(String isbn);
 
+    void deleteAudiobook(String isbn);
+
+    void updateAudiobook(Audiobook audiobook);
+
 }
