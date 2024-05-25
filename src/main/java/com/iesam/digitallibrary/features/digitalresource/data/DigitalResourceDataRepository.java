@@ -8,9 +8,13 @@ public class DigitalResourceDataRepository implements DigitalResourceRepository 
 
     DigitalResourceFileLocalDataSource dRLocal = new DigitalResourceFileLocalDataSource();
 
+    public DigitalResourceDataRepository(DigitalResourceFileLocalDataSource dRLocal) {
+        this.dRLocal = dRLocal;
+    }
 
     @Override
     public void getDigitalResources() {
-
+        dRLocal.findAll();
     }
+
 }

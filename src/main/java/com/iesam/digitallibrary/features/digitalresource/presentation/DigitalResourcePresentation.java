@@ -1,9 +1,17 @@
 package com.iesam.digitallibrary.features.digitalresource.presentation;
 
-import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.Audiobook;
+import com.iesam.digitallibrary.features.digitalresource.audiobook.data.AudiobookDataRepository;
+import com.iesam.digitallibrary.features.digitalresource.audiobook.data.local.AudiobookFileLocalDataSource;
+import com.iesam.digitallibrary.features.digitalresource.data.DigitalResourceDataRepository;
+import com.iesam.digitallibrary.features.digitalresource.data.local.DigitalResourceFileLocalDataSource;
+import com.iesam.digitallibrary.features.digitalresource.domain.DigitalResource;
+import com.iesam.digitallibrary.features.digitalresource.domain.ListDigitalResourcesUseCase;
 import com.iesam.digitallibrary.features.digitalresource.audiobook.presentation.AudiobookPresentation;
+import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
+import com.iesam.digitallibrary.features.digitalresource.ebook.data.local.EBookFileLocalDataSource;
 import com.iesam.digitallibrary.features.digitalresource.ebook.presentation.EBookPresentation;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class DigitalResourcePresentation {
@@ -29,7 +37,7 @@ public class DigitalResourcePresentation {
                     audiobookPresentation.showAudiobookMenu();
                     break;
                 case 3:
-                    //getDigitalResources();
+                    getDigitalResources();
                     break;
                 case 4:
                     System.out.println("Volviendo al Menú Principal...");
@@ -39,4 +47,16 @@ public class DigitalResourcePresentation {
             }
         } while (opcion != 4);
     }
+    public static void getDigitalResources() {
+        ListDigitalResourcesUseCase listDigitalResourcesUseCase = new ListDigitalResourcesUseCase(new DigitalResourceDataRepository(new DigitalResourceFileLocalDataSource()),
+                new EBookDataRepository(new EBookFileLocalDataSource()),
+                new AudiobookDataRepository(new AudiobookFileLocalDataSource())
+        );
+
+        List<DigitalResource> digitalResources = listDigitalResourcesUseCase.execute();
+        for (Object resource : digitalResources) {
+            System.out.println(resource);
+        }
+    }
+
 }
