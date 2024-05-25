@@ -6,7 +6,7 @@ import com.iesam.digitallibrary.features.digitalresource.domain.DigitalResourceR
 
 public class DigitalResourceDataRepository implements DigitalResourceRepository {
 
-    DigitalResourceFileLocalDataSource dRLocal = new DigitalResourceFileLocalDataSource();
+    public DigitalResourceFileLocalDataSource dRLocal;
 
     public DigitalResourceDataRepository(DigitalResourceFileLocalDataSource dRLocal) {
         this.dRLocal = dRLocal;
@@ -15,6 +15,11 @@ public class DigitalResourceDataRepository implements DigitalResourceRepository 
     @Override
     public void getDigitalResources() {
         dRLocal.findAll();
+    }
+
+    @Override
+    public DigitalResource getDigitalResource(String isbn) {
+        return dRLocal.findById(isbn);
     }
 
 }

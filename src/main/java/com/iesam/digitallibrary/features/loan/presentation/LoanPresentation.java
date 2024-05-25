@@ -1,5 +1,9 @@
 package com.iesam.digitallibrary.features.loan.presentation;
 
+import com.iesam.digitallibrary.features.digitalresource.audiobook.data.AudiobookDataRepository;
+import com.iesam.digitallibrary.features.digitalresource.audiobook.data.local.AudiobookFileLocalDataSource;
+import com.iesam.digitallibrary.features.digitalresource.data.DigitalResourceDataRepository;
+import com.iesam.digitallibrary.features.digitalresource.data.local.DigitalResourceFileLocalDataSource;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.local.EBookFileLocalDataSource;
 import com.iesam.digitallibrary.features.loan.data.LoanDataRepository;
@@ -20,7 +24,7 @@ public class LoanPresentation {
         int opcion;
         do {
             System.out.println("Menu de Gestión de prestamos:");
-            System.out.println("1. Agregar prestamos");
+            System.out.println("1. Agregar prestamos de Libros Digitales");
             System.out.println("2. Eliminar prestamo");
             System.out.println("3. Mostrar Todos los prestamos activos");
             System.out.println("4. Mostrar todos los prestamos finalizados");
@@ -29,7 +33,7 @@ public class LoanPresentation {
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
-                    createLoan();
+                    createEBookLoan();
                     break;
                 case 2:
                     deleteLoan();
@@ -53,7 +57,7 @@ public class LoanPresentation {
     static Scanner scanner = new Scanner(System.in);
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static void createLoan() {
+    public static void createEBookLoan() {
 
         System.out.println("Loan ID: ");
         scanner.nextLine();
@@ -62,8 +66,8 @@ public class LoanPresentation {
         System.out.println("User ID: ");
         String userId = scanner.nextLine();
 
-        System.out.println("EBook ISBN: ");
-        String eBookIsbn = scanner.nextLine();
+        System.out.println("Digital Resource ISBN: ");
+        String drISBN = scanner.nextLine();
 
         Date loanStartDate = generateCurrentDate();
         String startDate = simpleDateFormat.format(loanStartDate);
@@ -76,16 +80,17 @@ public class LoanPresentation {
 
                 new LoanDataRepository(LoanFileLocalDataSource.getInstance()),
                 new UserDataRepository(UserFileLocalDataSource.getInstance()),
-                new EBookDataRepository(EBookFileLocalDataSource.getInstance())
+                new EBookDataRepository(EBookFileLocalDataSource.getInstance()),
+                new AudiobookDataRepository(new AudiobookFileLocalDataSource())
 
         );
 
-        boolean success = newLoanUseCase.execute(loanId, userId, eBookIsbn, startDate, returnDate);
+        boolean success = newLoanUseCase.execute(loanId, userId, drISBN, startDate, returnDate);
 
         if (success) {
             System.out.println("Loan created successfully.");
         } else {
-            System.out.println("Error: User or eBook not found.");
+            System.out.println("Error: User or digital resource not found.");
         }
 
     }
@@ -96,7 +101,7 @@ public class LoanPresentation {
     }
 
     private static Date generateDateTenDaysAhead() {
-        LocalDate futureDate = LocalDate.now().plusDays(1);
+        LocalDate futureDate = LocalDate.now().plusDays(10);
         return Date.from(futureDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 

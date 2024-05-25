@@ -5,6 +5,7 @@ import com.iesam.digitallibrary.features.digitalresource.audiobook.data.local.Au
 import com.iesam.digitallibrary.features.digitalresource.data.DigitalResourceDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.data.local.DigitalResourceFileLocalDataSource;
 import com.iesam.digitallibrary.features.digitalresource.domain.DigitalResource;
+import com.iesam.digitallibrary.features.digitalresource.domain.GetDigitalResourceUseCase;
 import com.iesam.digitallibrary.features.digitalresource.domain.ListDigitalResourcesUseCase;
 import com.iesam.digitallibrary.features.digitalresource.audiobook.presentation.AudiobookPresentation;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
@@ -24,7 +25,8 @@ public class DigitalResourcePresentation {
             System.out.println("1. Gestionar eBook");
             System.out.println("2. Gestionar Audiobook");
             System.out.println("3. Mostrar Todos los Recursos Digitales");
-            System.out.println("4. Volver al menú de opciones");
+            System.out.println("4. Mostrar un Recurso Digitale por ISBN");
+            System.out.println("5. Volver al menú de opciones");
             System.out.print("Ingrese su opción: ");
             opcion = scanner.nextInt();
             switch (opcion) {
@@ -40,12 +42,15 @@ public class DigitalResourcePresentation {
                     getDigitalResources();
                     break;
                 case 4:
+                    getDigitalResource();
+                    break;
+                case 5:
                     System.out.println("Volviendo al Menú Principal...");
                     break;
                 default:
                     System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
             }
-        } while (opcion != 4);
+        } while (opcion != 5);
     }
     public static void getDigitalResources() {
         ListDigitalResourcesUseCase listDigitalResourcesUseCase = new ListDigitalResourcesUseCase(new DigitalResourceDataRepository(new DigitalResourceFileLocalDataSource()),
@@ -58,5 +63,22 @@ public class DigitalResourcePresentation {
             System.out.println(resource);
         }
     }
+    public static void getDigitalResource() {
+        GetDigitalResourceUseCase getDigitalResourceUseCase = new GetDigitalResourceUseCase(
+                new DigitalResourceDataRepository(new DigitalResourceFileLocalDataSource()),
+                new EBookDataRepository(new EBookFileLocalDataSource()),
+                new AudiobookDataRepository(new AudiobookFileLocalDataSource())
+        );
 
+        System.out.print("Ingrese el ISBN del recurso digital: ");
+        String isbn = scanner.next();
+
+        DigitalResource digitalResource = getDigitalResourceUseCase.getDigitalResource(isbn);
+        if (digitalResource != null) {
+            System.out.println("Se encontró el recurso digital:");
+            System.out.println(digitalResource);
+        } else {
+            System.out.println("No se encontró ningún recurso digital con el ISBN proporcionado.");
+        }
+    }
 }
