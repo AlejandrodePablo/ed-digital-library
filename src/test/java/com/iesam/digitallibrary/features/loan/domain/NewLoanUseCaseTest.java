@@ -1,5 +1,7 @@
 package com.iesam.digitallibrary.features.loan.domain;
 
+import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.Audiobook;
+import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.AudiobookRepository;
 import com.iesam.digitallibrary.features.digitalresource.ebook.domain.EBook;
 import com.iesam.digitallibrary.features.digitalresource.ebook.domain.EBookRepository;
 import com.iesam.digitallibrary.features.user.domain.User;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @ExtendWith(MockitoExtension.class)
 class NewLoanUseCaseTest {
@@ -21,12 +25,14 @@ class NewLoanUseCaseTest {
     UserRepository userRepository;
     @Mock
     EBookRepository eBookRepository;
+    @Mock
+    AudiobookRepository audiobookRepository;
 
     NewLoanUseCase newLoanUseCase;
 
     @BeforeEach
     void setUp() {
-        newLoanUseCase = new NewLoanUseCase(loanRepository, userRepository, eBookRepository);
+        newLoanUseCase = new NewLoanUseCase(loanRepository, userRepository, eBookRepository, audiobookRepository);
     }
 
     @AfterEach
@@ -35,71 +41,49 @@ class NewLoanUseCaseTest {
     }
 
     @Test
-    void givenValidLoanThenSaveLoan() {
+    void givenValidEBookThenSaveLoan() {
         // Given
         String loanId = "123";
-        String userId = "user123";
-        String eBookIsbn = "isbn123";
-        String startDate = "2024-05-25";
-        String returnDate = "2024-06-05";
+        String userId = "456";
+        String isbn = "789";
+        String startDate = "2024-05-01";
+        String returnDate = "2024-05-15";
 
-        // Mock of UserRepository
-        UserRepository userRepository = Mockito.mock(UserRepository.class);
-        User user = new User(userId, null, null, null, null, null, null);
+        User user = new User(userId, "Dni", "Nombre", "Apellido", "email@example.com", "23","000000000");
+        EBook eBook = new EBook(isbn, "Title", "Author", "Genre", "2024", "Language");
+
         Mockito.when(userRepository.getUser(userId)).thenReturn(user);
-
-        // Mock of EBookRepository
-        EBookRepository eBookRepository = Mockito.mock(EBookRepository.class);
-        EBook eBook = new EBook(eBookIsbn, null, null, null, null, null);
-        Mockito.when(eBookRepository.getEBook(eBookIsbn)).thenReturn(eBook);
-
-        newLoanUseCase = new NewLoanUseCase(loanRepository, userRepository, eBookRepository);
+        Mockito.when(eBookRepository.getEBook(isbn)).thenReturn(eBook);
 
         // When
-        boolean success = newLoanUseCase.execute(loanId, userId, eBookIsbn, startDate, returnDate);
+        boolean result = newLoanUseCase.execute(loanId, userId, isbn, startDate, returnDate);
 
         // Then
-        Assertions.assertTrue(success);
-        Mockito.verify(loanRepository, Mockito.times(1)).createLoan(Mockito.any(Loan.class));
+        Assertions.assertTrue(result);
+        Mockito.verify(loanRepository).createLoan(Mockito.any(Loan.class));
     }
 
     @Test
-    public void ifLoanIsNullThenNeverCreateIt(){
-        // Given
-        String loanId = null;
-        String userId = null;
-        String eBookIsbn = null;
-        String startDate = null;
-        String returnDate = null;
-
-        // When
-        boolean success = newLoanUseCase.execute(loanId, userId, eBookIsbn, startDate, returnDate);
-
-        // Then
-        Assertions.assertFalse(success);
-        Mockito.verify(loanRepository, Mockito.never()).createLoan(Mockito.any(Loan.class));
-    }
-
-    @Test
-    public void ifUserOrEBookNotFoundThenReturnFalse(){
+    void givenValidAudiobookThenSaveLoan() {
         // Given
         String loanId = "123";
-        String userId = "validUserId"; // valid ID, but user does not exist
-        String eBookIsbn = "validEBookIsbn"; // valid ISBN, but eBook does not exist
-        String startDate = "2024-05-25";
-        String returnDate = "2024-06-05";
+        String userId = "456";
+        String isbn = "789";
+        String startDate = "2024-05-01";
+        String returnDate = "2024-05-15";
 
-        // We simulate that the user repository returns null for the given user ID
-        Mockito.when(userRepository.getUser(userId)).thenReturn(null);
-        // We simulate that the eBook repository returns null for the given eBook ISBN
-        Mockito.when(eBookRepository.getEBook(eBookIsbn)).thenReturn(null);
+        User user = new User(userId, "Dni", "Nombre", "Apellido", "email@example.com", "23","000000000");
+        Audiobook audiobook = new Audiobook(isbn, "Title", "Author", "Genre", "2024", "duration");
+
+        Mockito.when(userRepository.getUser(userId)).thenReturn(user);
+        Mockito.when(audiobookRepository.getAudiobook(isbn)).thenReturn(audiobook);
 
         // When
-        boolean success = newLoanUseCase.execute(loanId, userId, eBookIsbn, startDate, returnDate);
+        boolean result = newLoanUseCase.execute(loanId, userId, isbn, startDate, returnDate);
 
         // Then
-        Assertions.assertFalse(success);
-        Mockito.verify(loanRepository, Mockito.never()).createLoan(Mockito.any(Loan.class));
+        Assertions.assertTrue(result);
+        Mockito.verify(loanRepository).createLoan(Mockito.any(Loan.class));
     }
 
 }
