@@ -10,6 +10,16 @@ public class User {
     public final String age;
     public final String telephone;
 
+    public User(String dni, String name, String surname, String email, String age, String telephone) {
+        this.id = generateUniqueId();
+        this.dni = dni;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.age = age;
+        this.telephone = telephone;
+    }
+
     public User(String id, String dni, String name, String surname, String email, String age, String telephone) {
         this.id = id;
         this.dni = dni;
@@ -18,6 +28,10 @@ public class User {
         this.email = email;
         this.age = age;
         this.telephone = telephone;
+    }
+
+    private static String generateUniqueId() {
+        return String.valueOf(System.currentTimeMillis());
     }
 
     @Override
