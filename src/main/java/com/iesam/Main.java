@@ -3,6 +3,10 @@ package com.iesam;
 
 import com.iesam.digitallibrary.features.digitalresource.presentation.DigitalResourcePresentation;
 import com.iesam.digitallibrary.features.loan.presentation.LoanPresentation;
+import com.iesam.digitallibrary.features.user.data.UserDataRepository;
+import com.iesam.digitallibrary.features.user.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.features.user.data.local.UserMemLocalDataSource;
+import com.iesam.digitallibrary.features.user.domain.UserRepository;
 import com.iesam.digitallibrary.features.user.presentation.UserPresentation;
 
 import java.util.Scanner;
@@ -22,9 +26,11 @@ public class Main {
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
-                    UserPresentation userPresentation = new UserPresentation();
+                    UserRepository userRepository = new UserDataRepository(new UserMemLocalDataSource(), new UserFileLocalDataSource());
+                    UserPresentation userPresentation = new UserPresentation(userRepository);
                     userPresentation.showUserMenu();
                     break;
+
                 case 2:
                     DigitalResourcePresentation digitalResourcePresentation = new DigitalResourcePresentation();
                     digitalResourcePresentation.showDResourceMenu();

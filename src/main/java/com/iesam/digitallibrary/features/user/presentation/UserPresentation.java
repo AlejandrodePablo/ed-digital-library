@@ -1,19 +1,22 @@
 package com.iesam.digitallibrary.features.user.presentation;
 
-import com.iesam.digitallibrary.features.loan.domain.Loan;
-import com.iesam.digitallibrary.features.user.data.UserDataRepository;
-import com.iesam.digitallibrary.features.user.data.local.UserFileLocalDataSource;
-import com.iesam.digitallibrary.features.user.domain.*;
+import com.iesam.digitallibrary.features.user.domain.User;
+import com.iesam.digitallibrary.features.user.domain.UserRepository;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class UserPresentation {
 
-    static Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
+    private final UserRepository userRepository;
+
+    public UserPresentation(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void showUserMenu() {
-        int opcion;
+        int option;
         do {
             System.out.println("\nMenú de Gestión de Usuarios:");
             System.out.println("1. Agregar Usuario");
@@ -23,8 +26,8 @@ public class UserPresentation {
             System.out.println("5. Actualizar un Usuario");
             System.out.println("6. Volver al Menú Principal");
             System.out.print("Ingrese su opción: \n");
-            opcion = scanner.nextInt();
-            switch (opcion) {
+            option = scanner.nextInt();
+            switch (option) {
                 case 1:
                     createUser();
                     break;
@@ -39,20 +42,19 @@ public class UserPresentation {
                     break;
                 case 5:
                     updateUser();
+                    break;
                 case 6:
                     System.out.println("Volviendo al Menú Principal...");
                     break;
                 default:
                     System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
             }
-        } while (opcion != 6);
+        } while (option != 6);
     }
 
-    public static void createUser() {
-
-
+    private void createUser() {
         System.out.println("DNI: ");
-        scanner.nextLine();
+        scanner.nextLine(); // Limpiar el buffer
         String dni = scanner.nextLine();
         System.out.println("Nombre: ");
         String name = scanner.nextLine();
@@ -66,42 +68,38 @@ public class UserPresentation {
         String telephone = scanner.nextLine();
 
         User newUser = new User(dni, name, surname, email, age, telephone);
-        NewUserUseCase newUserUseCase = new NewUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
-        newUserUseCase.execute(newUser);
+        userRepository.createUser(newUser);
     }
 
-    public static void getUsers() {
-        ListUsersUseCase listUsersUseCase = new ListUsersUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
-        List<User> users = listUsersUseCase.execute();
+    private void getUsers() {
+        List<User> users = userRepository.getUsers();
         for (User user : users) {
             System.out.println(user.toString());
         }
     }
 
-    public static User getUser() {
+    private void getUser() {
         System.out.println("User ID to list: ");
-        scanner.nextLine();
+        scanner.nextLine(); // Limpiar el buffer
         String id = scanner.nextLine();
 
-        GetUserUseCase getUserUseCase = new GetUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
-        User user = getUserUseCase.execute(id);
+        User user = userRepository.getUser(id);
 
         if (user != null) {
             System.out.println(user);
         } else {
             System.out.println("User with ID " + id + " does not exist.");
         }
-        return user;
     }
 
-    public static void deleteUser() {
+    private void deleteUser() {
         System.out.println("User ID to delete: ");
+        scanner.nextLine(); // Limpiar el buffer
         String id = scanner.nextLine();
-        DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
-        deleteUserUseCase.execute(id);
+        userRepository.deleteUser(id);
     }
 
-    public static void updateUser() {
+    private void updateUser() {
         System.out.println("ID del usuario a actualizar: ");
         String id = scanner.nextLine();
         System.out.println("Nuevo DNI: ");
@@ -118,7 +116,6 @@ public class UserPresentation {
         String telephone = scanner.nextLine();
 
         User updatedUser = new User(id, dni, name, surname, email, age, telephone);
-        UpdateUserUseCase updateUserUseCase = new UpdateUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
-        updateUserUseCase.execute(updatedUser);
+        userRepository.updateUser(updatedUser);
     }
 }
