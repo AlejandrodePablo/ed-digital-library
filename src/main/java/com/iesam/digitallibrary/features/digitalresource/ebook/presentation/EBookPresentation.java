@@ -3,6 +3,7 @@ package com.iesam.digitallibrary.features.digitalresource.ebook.presentation;
 import com.iesam.digitallibrary.features.digitalresource.ebook.domain.*;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.local.EBookFileLocalDataSource;
+import com.iesam.digitallibrary.features.loan.domain.Loan;
 
 
 import java.util.List;
@@ -16,14 +17,14 @@ public class EBookPresentation {
     public void showEbookMenu() {
         int opcion;
         do {
-            System.out.println("Menú de Gestión de eBook:");
+            System.out.println("\nMenú de Gestión de eBook:");
             System.out.println("1. Agregar eBook");
             System.out.println("2. Eliminar eBook");
             System.out.println("3. Mostrar Todos los eBook");
             System.out.println("4. Mostrar eBook por ISBN");
             System.out.println("5. Actualizar un eBook");
             System.out.println("6. Volver al de Gestion de Recursos Digitales");
-            System.out.print("Ingrese su opción: ");
+            System.out.print("Ingrese su opción: \n");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
@@ -52,9 +53,8 @@ public class EBookPresentation {
 
     public static void createEBook() {
 
-        System.out.println("ISBN: ");
-        String isbn = scanner.nextLine();
         System.out.println("Title: ");
+        scanner.nextLine();
         String title = scanner.nextLine();
         System.out.println("Author(s): ");
         String author = scanner.nextLine();
@@ -65,7 +65,7 @@ public class EBookPresentation {
         System.out.println("Language: ");
         String language = scanner.nextLine();
 
-        EBook newEBook = new EBook(isbn, title, author, genre, publicationYear, language);
+        EBook newEBook = new EBook(title, author, genre, publicationYear, language);
         NewEBookUseCase newEBookUseCase = new NewEBookUseCase(new EBookDataRepository(EBookFileLocalDataSource.getInstance()));
         newEBookUseCase.execute(newEBook);
     }
@@ -87,7 +87,7 @@ public class EBookPresentation {
         EBook eBook = getEBookUseCase.execute(isbn);
 
         if (eBook != null) {
-            System.out.println(eBook.toString());
+            System.out.println(eBook);
         } else {
             System.out.println("eBook with ISBN " + isbn + " does not exist");
         }
@@ -97,11 +97,16 @@ public class EBookPresentation {
     public static void getEbooks() {
         ListEbooksUseCase listEbooksUseCase = new ListEbooksUseCase(new EBookDataRepository(EBookFileLocalDataSource.getInstance()));
         List<EBook> ebooks = listEbooksUseCase.execute();
-        System.out.println(ebooks);
+
+        for (EBook ebook: ebooks) {
+            System.out.println(ebook.toString()+"\n");
+        }
     }
 
     public static void updateEBook() {
-        System.out.println("ISBN del libro a actualizar: ");
+
+        System.out.println("ISBN to update");
+        scanner.nextLine();
         String isbn = scanner.nextLine();
         System.out.println("Nuevo titulo: ");
         String title = scanner.nextLine();

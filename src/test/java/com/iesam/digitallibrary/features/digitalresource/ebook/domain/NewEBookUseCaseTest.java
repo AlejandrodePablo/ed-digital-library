@@ -32,7 +32,7 @@ class NewEBookUseCaseTest {
     @Test
     public void receiveAnEBookAndSaveIt(){
         //Given
-        EBook eBookToSave = new EBook("100", "Title", "Author", "Comedy", "2024", "English");
+        EBook eBookToSave = new EBook("Title", "Author", "Comedy", "2024", "English");
 
         //When
         newEBookUseCase.execute(eBookToSave);

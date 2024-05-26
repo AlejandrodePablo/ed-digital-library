@@ -18,6 +18,17 @@ public class Loan {
         this.startDate = startDate;
         this.returnDate = returnDate;
     }
+    public Loan(User userid, DigitalResource digitalResource, String startDate, String returnDate) {
+        this.loanId = generateUniqueId();
+        this.userid = userid;
+        this.digitalResource = digitalResource;
+        this.startDate = startDate;
+        this.returnDate = returnDate;
+    }
+
+    private static String generateUniqueId() {
+        return String.valueOf(System.currentTimeMillis());
+    }
 
     @Override
     public String toString() {

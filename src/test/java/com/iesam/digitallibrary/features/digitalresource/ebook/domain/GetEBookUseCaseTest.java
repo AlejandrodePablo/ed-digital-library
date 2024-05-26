@@ -32,7 +32,7 @@ class GetEBookUseCaseTest {
     @Test
     public void givingAValidIdThenReturnAnEBook(){
         //Given
-        EBook eBookExpected = new EBook("100", "Title", "Author", "Comedy", "2024", "English");
+        EBook eBookExpected = new EBook("Title", "Author", "Comedy", "2024", "English");
         Mockito.when(eBookRepository.getEBook("100")).thenReturn(eBookExpected);
 
         //When
@@ -77,7 +77,7 @@ class GetEBookUseCaseTest {
     public void testGetEBookCallsRepository() {
         // Given
         String eBookIsbn = "123";
-        EBook expectedEBook = new EBook(eBookIsbn, "Title", "Author", "Fiction", "2024", "English");
+        EBook expectedEBook = new EBook("Title", "Author", "Fiction", "2024", "English");
         Mockito.when(eBookRepository.getEBook(eBookIsbn)).thenReturn(expectedEBook);
 
         // When

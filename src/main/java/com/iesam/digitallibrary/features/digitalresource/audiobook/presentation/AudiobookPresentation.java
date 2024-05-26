@@ -3,6 +3,7 @@ package com.iesam.digitallibrary.features.digitalresource.audiobook.presentation
 import com.iesam.digitallibrary.features.digitalresource.audiobook.data.AudiobookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.audiobook.data.local.AudiobookFileLocalDataSource;
 import com.iesam.digitallibrary.features.digitalresource.audiobook.domain.*;
+import com.iesam.digitallibrary.features.loan.domain.Loan;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,14 +15,14 @@ public class AudiobookPresentation {
     public void showAudiobookMenu() {
         int opcion;
         do {
-            System.out.println("Menú de Gestión de Audiobook:");
+            System.out.println("\nMenú de Gestión de Audiobook:");
             System.out.println("1. Agregar Audiobook");
             System.out.println("2. Borrar Audiobook por ISBN");
             System.out.println("3. Mostrar todos los Audiobook");
             System.out.println("4. Mostrar Audiobook por ISBN");
             System.out.println("5. Actualizar Audiobook por ISBN");
             System.out.println("6. Volver al Menú de Gestion de Recursos Digitales");
-            System.out.print("Ingrese su opción: ");
+            System.out.print("Ingrese su opción: \n");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
@@ -49,10 +50,9 @@ public class AudiobookPresentation {
     }
 
     public static void createAudiobook(){
-        System.out.println("ISBN: ");
-        scanner.nextLine();
-        String isbn = scanner.nextLine();
+
         System.out.println("Title: ");
+        scanner.nextLine();
         String title = scanner.nextLine();
         System.out.println("Author(s): ");
         String author = scanner.nextLine();
@@ -63,7 +63,7 @@ public class AudiobookPresentation {
         System.out.println("Duration (minutes): ");
         String duration = scanner.nextLine();
 
-        Audiobook newAudiobook = new Audiobook(isbn, title, author, genre, publicationYear, duration);
+        Audiobook newAudiobook = new Audiobook(title, author, genre, publicationYear, duration);
         NewAudiobookUseCase newAudiobookUseCase = new NewAudiobookUseCase(new AudiobookDataRepository(new AudiobookFileLocalDataSource()));
         newAudiobookUseCase.execute(newAudiobook);
     }
@@ -71,7 +71,9 @@ public class AudiobookPresentation {
     public static void getAudiobooks(){
         ListAudiobooksUseCase listAudiobooksUseCase = new ListAudiobooksUseCase(new AudiobookDataRepository(new AudiobookFileLocalDataSource()));
         List<Audiobook> audiobooks = listAudiobooksUseCase.execute();
-        System.out.println(audiobooks);
+        for (Audiobook audiobook : audiobooks) {
+            System.out.println(audiobook.toString());
+        }
     }
 
     public static Audiobook getAudiobook(){

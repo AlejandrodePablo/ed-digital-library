@@ -2,8 +2,6 @@ package com.iesam.digitallibrary.features.loan.presentation;
 
 import com.iesam.digitallibrary.features.digitalresource.audiobook.data.AudiobookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.audiobook.data.local.AudiobookFileLocalDataSource;
-import com.iesam.digitallibrary.features.digitalresource.data.DigitalResourceDataRepository;
-import com.iesam.digitallibrary.features.digitalresource.data.local.DigitalResourceFileLocalDataSource;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.EBookDataRepository;
 import com.iesam.digitallibrary.features.digitalresource.ebook.data.local.EBookFileLocalDataSource;
 import com.iesam.digitallibrary.features.loan.data.LoanDataRepository;
@@ -23,13 +21,13 @@ public class LoanPresentation {
     public void showLoanMenu() {
         int opcion;
         do {
-            System.out.println("Menu de Gestión de prestamos:");
+            System.out.println("\nMenu de Gestión de prestamos:");
             System.out.println("1. Agregar prestamos de Libros Digitales");
             System.out.println("2. Eliminar prestamo");
             System.out.println("3. Mostrar Todos los prestamos activos");
             System.out.println("4. Mostrar todos los prestamos finalizados");
             System.out.println("5. Volver al Menú Principal");
-            System.out.print("Ingrese su opción: ");
+            System.out.print("Ingrese su opción: \n");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
@@ -59,11 +57,8 @@ public class LoanPresentation {
 
     public static void createEBookLoan() {
 
-        System.out.println("Loan ID: ");
-        scanner.nextLine();
-        String loanId = scanner.nextLine();
-
         System.out.println("User ID: ");
+        scanner.nextLine();
         String userId = scanner.nextLine();
 
         System.out.println("Digital Resource ISBN: ");
@@ -85,7 +80,7 @@ public class LoanPresentation {
 
         );
 
-        boolean success = newLoanUseCase.execute(loanId, userId, drISBN, startDate, returnDate);
+        boolean success = newLoanUseCase.execute(userId, drISBN, startDate, returnDate);
 
         if (success) {
             System.out.println("Loan created successfully.");
@@ -111,7 +106,6 @@ public class LoanPresentation {
         List<Loan> unreturnedLoans = listUnreturnedLoansUseCase.execute();
 
         for (Loan loan : unreturnedLoans) {
-            System.out.println("Unreturned loans");
             System.out.println(loan.toString());
         }
     }
@@ -128,7 +122,6 @@ public class LoanPresentation {
         List<Loan> returnedLoans = listReturnedLoansUseCase.execute();
 
         for (Loan loan : returnedLoans) {
-            System.out.println("Returned loans");
             System.out.println(loan.toString());
         }
     }

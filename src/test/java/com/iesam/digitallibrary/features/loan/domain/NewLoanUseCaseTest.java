@@ -50,13 +50,13 @@ class NewLoanUseCaseTest {
         String returnDate = "2024-05-15";
 
         User user = new User(userId, "Dni", "Nombre", "Apellido", "email@example.com", "23","000000000");
-        EBook eBook = new EBook(isbn, "Title", "Author", "Genre", "2024", "Language");
+        EBook eBook = new EBook("Title", "Author", "Genre", "2024", "Language");
 
         Mockito.when(userRepository.getUser(userId)).thenReturn(user);
         Mockito.when(eBookRepository.getEBook(isbn)).thenReturn(eBook);
 
         // When
-        boolean result = newLoanUseCase.execute(loanId, userId, isbn, startDate, returnDate);
+        boolean result = newLoanUseCase.execute(userId, isbn, startDate, returnDate);
 
         // Then
         Assertions.assertTrue(result);
@@ -73,13 +73,13 @@ class NewLoanUseCaseTest {
         String returnDate = "2024-05-15";
 
         User user = new User(userId, "Dni", "Nombre", "Apellido", "email@example.com", "23","000000000");
-        Audiobook audiobook = new Audiobook(isbn, "Title", "Author", "Genre", "2024", "duration");
+        Audiobook audiobook = new Audiobook("Title", "Author", "Genre", "2024", "duration");
 
         Mockito.when(userRepository.getUser(userId)).thenReturn(user);
         Mockito.when(audiobookRepository.getAudiobook(isbn)).thenReturn(audiobook);
 
         // When
-        boolean result = newLoanUseCase.execute(loanId, userId, isbn, startDate, returnDate);
+        boolean result = newLoanUseCase.execute(userId, isbn, startDate, returnDate);
 
         // Then
         Assertions.assertTrue(result);

@@ -6,8 +6,13 @@ public class EBook extends DigitalResource {
 
     public final String language;
 
+    public EBook(String title, String author, String genre, String publicationYear, String language) {
+        super(title, author, genre, publicationYear); // Usa el isbn como id
+        this.language = language;
+    }
+
     public EBook(String isbn, String title, String author, String genre, String publicationYear, String language) {
-        super(isbn, title, author, genre, publicationYear); // Usa el isbn como id
+        super(isbn, title, author, genre, publicationYear);//To update
         this.language = language;
     }
 

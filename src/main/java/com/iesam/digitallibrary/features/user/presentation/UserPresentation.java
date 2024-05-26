@@ -1,5 +1,6 @@
 package com.iesam.digitallibrary.features.user.presentation;
 
+import com.iesam.digitallibrary.features.loan.domain.Loan;
 import com.iesam.digitallibrary.features.user.data.UserDataRepository;
 import com.iesam.digitallibrary.features.user.data.local.UserFileLocalDataSource;
 import com.iesam.digitallibrary.features.user.domain.*;
@@ -21,7 +22,7 @@ public class UserPresentation {
             System.out.println("4. Mostrar Usuario por ID");
             System.out.println("5. Actualizar un Usuario");
             System.out.println("6. Volver al Menú Principal");
-            System.out.print("Ingrese su opción: ");
+            System.out.print("Ingrese su opción: \n");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
@@ -72,7 +73,9 @@ public class UserPresentation {
     public static void getUsers() {
         ListUsersUseCase listUsersUseCase = new ListUsersUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         List<User> users = listUsersUseCase.execute();
-        System.out.println(users.toString());
+        for (User user : users) {
+            System.out.println(user.toString());
+        }
     }
 
     public static User getUser() {

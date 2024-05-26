@@ -32,7 +32,7 @@ class UpdateEBookUseCaseTest {
     @Test
     public void ifIsbnExistThenUpdateUser() {
         //Given
-        EBook updatedEbook = new EBook("100", "Title", "Author", "Romance", "2024", "French");
+        EBook updatedEbook = new EBook("Title", "Author", "Romance", "2024", "French");
         Mockito.doNothing().when(eBookRepository).updateEBook(Mockito.any(EBook.class));
 
         //When
