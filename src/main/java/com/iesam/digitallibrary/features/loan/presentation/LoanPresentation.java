@@ -9,6 +9,8 @@ import com.iesam.digitallibrary.features.loan.data.local.LoanFileLocalDataSource
 import com.iesam.digitallibrary.features.loan.domain.*;
 import com.iesam.digitallibrary.features.user.data.UserDataRepository;
 import com.iesam.digitallibrary.features.user.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.features.user.data.local.UserMemLocalDataSource;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -74,7 +76,7 @@ public class LoanPresentation {
         NewLoanUseCase newLoanUseCase = new NewLoanUseCase(
 
                 new LoanDataRepository(LoanFileLocalDataSource.getInstance()),
-                new UserDataRepository(UserFileLocalDataSource.getInstance()),
+                new UserDataRepository(UserMemLocalDataSource.getInstance(), UserFileLocalDataSource.getInstance()),
                 new EBookDataRepository(EBookFileLocalDataSource.getInstance()),
                 new AudiobookDataRepository(new AudiobookFileLocalDataSource())
 

@@ -9,40 +9,53 @@ import java.util.List;
 
 public class UserDataRepository implements UserRepository {
 
-    public static final UserMemLocalDataSource userMemLocalDataSource = UserMemLocalDataSource.getInstance();
+    private final UserMemLocalDataSource userMemLocalDataSource;
     private final UserFileLocalDataSource userFileLocalDataSource;
 
-    public UserDataRepository(UserFileLocalDataSource userFileLocalDataSource) {
-        this.userFileLocalDataSource = userFileLocalDataSource;
-    }
-
-    public UserDataRepository(UserMemLocalDataSource userDataSource, UserFileLocalDataSource userFileLocalDataSource) {
+    public UserDataRepository(UserMemLocalDataSource userMemLocalDataSource, UserFileLocalDataSource userFileLocalDataSource) {
+        this.userMemLocalDataSource = userMemLocalDataSource;
         this.userFileLocalDataSource = userFileLocalDataSource;
     }
 
     @Override
     public void createUser(User user) {
         userFileLocalDataSource.save(user);
-
+        userMemLocalDataSource.save(user);
     }
 
     @Override
     public List<User> getUsers() {
-        return userFileLocalDataSource.findAll();
+        List<User> users = userMemLocalDataSource.findAll();
+        if (users.isEmpty()) {
+            users = userFileLocalDataSource.findAll();
+            if (!users.isEmpty()) {
+                userMemLocalDataSource.saveList(users);
+            }
+        }
+        return users;
     }
 
     @Override
     public User getUser(String id) {
-        return userFileLocalDataSource.findById(id);
+        User user = userMemLocalDataSource.findById(id);
+        if (user == null) {
+            user = userFileLocalDataSource.findById(id);
+            if (user != null) {
+                userMemLocalDataSource.save(user);
+            }
+        }
+        return user;
     }
 
     @Override
     public void deleteUser(String id) {
-        this.userFileLocalDataSource.delete(id);
+        userFileLocalDataSource.delete(id);
+        userMemLocalDataSource.delete(id);
     }
 
     @Override
     public void updateUser(User user) {
-        this.userFileLocalDataSource.update(user);
+        userFileLocalDataSource.update(user);
+        userMemLocalDataSource.update(user);
     }
 }

@@ -25,7 +25,7 @@ public class UserFileLocalDataSource {
     private final Type typeList = new TypeToken<ArrayList<User>>() {
     }.getType();
 
-    private UserFileLocalDataSource() {
+    public UserFileLocalDataSource() {
         // Private Constructor
     }
 
