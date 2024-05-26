@@ -14,7 +14,7 @@ public class UserPresentation {
     public void showUserMenu() {
         int opcion;
         do {
-            System.out.println("Menú de Gestión de Usuarios:");
+            System.out.println("\nMenú de Gestión de Usuarios:");
             System.out.println("1. Agregar Usuario");
             System.out.println("2. Eliminar Usuario");
             System.out.println("3. Mostrar Todos los Usuarios");
@@ -49,9 +49,9 @@ public class UserPresentation {
 
     public static void createUser() {
 
-        System.out.println("ID: ");
-        String id = scanner.nextLine();
+
         System.out.println("DNI: ");
+        scanner.nextLine();
         String dni = scanner.nextLine();
         System.out.println("Nombre: ");
         String name = scanner.nextLine();
@@ -64,9 +64,7 @@ public class UserPresentation {
         System.out.println("Telefono: ");
         String telephone = scanner.nextLine();
 
-        scanner.close();
-
-        User newUser = new User(id, dni, name, surname, email, age, telephone);
+        User newUser = new User(dni, name, surname, email, age, telephone);
         NewUserUseCase newUserUseCase = new NewUserUseCase(new UserDataRepository(UserFileLocalDataSource.getInstance()));
         newUserUseCase.execute(newUser);
     }
@@ -86,7 +84,7 @@ public class UserPresentation {
         User user = getUserUseCase.execute(id);
 
         if (user != null) {
-            System.out.println(user.toString());
+            System.out.println(user);
         } else {
             System.out.println("User with ID " + id + " does not exist.");
         }
