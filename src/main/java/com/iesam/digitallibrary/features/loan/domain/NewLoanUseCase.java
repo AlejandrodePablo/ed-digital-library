@@ -22,17 +22,17 @@ public class NewLoanUseCase {
         this.audiobookRepository = audiobookRepository;
     }
 
-    public boolean execute(String loanId, String id, String isbn, String startDate, String returnDate) {
+    public boolean execute(String id, String isbn, String startDate, String returnDate) {
         User user = userRepository.getUser(id);
         EBook ebook = eBookRepository.getEBook(isbn);
         Audiobook audiobook = audiobookRepository.getAudiobook(isbn);
 
         if (ebook != null) {
-            Loan newLoan = new Loan(loanId, user, ebook, startDate, returnDate);
+            Loan newLoan = new Loan(user, ebook, startDate, returnDate);
             loanRepository.createLoan(newLoan);
             return true;
         }else {
-            Loan newLoan = new Loan(loanId, user, audiobook, startDate, returnDate);
+            Loan newLoan = new Loan(user, audiobook, startDate, returnDate);
             loanRepository.createLoan(newLoan);
             return true;
         }

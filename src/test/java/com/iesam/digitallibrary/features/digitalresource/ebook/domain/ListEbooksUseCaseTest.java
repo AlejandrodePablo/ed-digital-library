@@ -36,8 +36,8 @@ class ListEbooksUseCaseTest {
     @Test
     public void ifExistsEBooksThenReturnTheEBookList(){
         //Given
-        EBook eBook1 = new EBook("100","Title1", "Author1", "Comedy", "2024","Spanish");
-        EBook eBook2 = new EBook("200","Title2", "Author2", "Fiction", "2024","Spanish");
+        EBook eBook1 = new EBook("Title1", "Author1", "Comedy", "2024","Spanish");
+        EBook eBook2 = new EBook("Title2", "Author2", "Fiction", "2024","Spanish");
         Mockito.when(eBookRepository.getEBooks()).thenReturn(List.of(eBook1, eBook2));
 
         //When
@@ -65,7 +65,7 @@ class ListEbooksUseCaseTest {
     @Test
     public void ifExistsSingleEBookThenReturnTheSingleEBookList() {
         // Given
-        EBook eBook = new EBook("100", "Title1", "Author1", "Comedy", "2024", "Spanish");
+        EBook eBook = new EBook("Title1", "Author1", "Comedy", "2024", "Spanish");
         Mockito.when(eBookRepository.getEBooks()).thenReturn(List.of(eBook));
 
         // When

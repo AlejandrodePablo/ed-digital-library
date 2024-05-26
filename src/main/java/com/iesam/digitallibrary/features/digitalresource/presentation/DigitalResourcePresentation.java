@@ -21,13 +21,13 @@ public class DigitalResourcePresentation {
     public void showDResourceMenu() {
         int opcion;
         do {
-            System.out.println("Menú de Gestión de Recursos Digitales:");
+            System.out.println("\nMenú de Gestión de Recursos Digitales:");
             System.out.println("1. Gestionar eBook");
             System.out.println("2. Gestionar Audiobook");
             System.out.println("3. Mostrar Todos los Recursos Digitales");
             System.out.println("4. Mostrar un Recurso Digitale por ISBN");
             System.out.println("5. Volver al menú de opciones");
-            System.out.print("Ingrese su opción: ");
+            System.out.print("Ingrese su opción: \n");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:

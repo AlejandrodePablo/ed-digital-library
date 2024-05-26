@@ -38,13 +38,13 @@ class ListUnreturnedLoansUseCaseTest {
         // Given
         List<Loan> unreturnedLoans = new ArrayList<>();
         Loan unreturnedLoan1 = new Loan("123",
-                new User(null,null,null,null,null,null,null),
-                new EBook(null,null,null,null,null,null),
+                new User(null,null,null,null,null,null),
+                new EBook(null,null,null,null,null),
                 "2024-05-25", "2024-06-05");
 
         Loan unreturnedLoan2 = new Loan("456",
                 new User(null,null,null,null,null,null,null),
-                new EBook(null,null,null,null,null,null),
+                new EBook(null,null,null,null,null),
                 "2024-05-26", "2024-06-06");
 
         unreturnedLoans.add(unreturnedLoan1);

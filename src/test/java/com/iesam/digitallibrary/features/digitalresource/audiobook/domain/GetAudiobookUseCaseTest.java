@@ -27,43 +27,61 @@ class GetAudiobookUseCaseTest {
     }
 
     @Test
-    public void givingAValidIsbnThenGetAudiobook(){
-        //Given
+    public void givingAValidIsbnThenGetAudiobook() {
+        // Given
         String validIsbn = "123";
-        Audiobook audiobookExpected = new Audiobook(validIsbn, "Title", "Author", "Genre", "Year", "Duration");
-        Mockito.when(audiobookRepository.getAudiobook("123")).thenReturn(audiobookExpected);
+        Audiobook audiobookExpected = new Audiobook("123", "Title", "Author", "Genre", "Year", "Duration");
+        Mockito.when(audiobookRepository.getAudiobook(validIsbn)).thenReturn(audiobookExpected);
 
-        //When
+        // When
         Audiobook audiobookReceived = getAudiobookUseCase.execute(validIsbn);
 
-        //Then
-        Assertions.assertEquals(audiobookReceived.isbn, "123");
-        Assertions.assertEquals(audiobookReceived.title, "Title");
-        Assertions.assertEquals(audiobookReceived.author, "Author");
-        Assertions.assertEquals(audiobookReceived.genre, "Genre");
-        Assertions.assertEquals(audiobookReceived.publicationYear, "Year");
-        Assertions.assertEquals(audiobookReceived.duration, "Duration");
+        // Then
+        Assertions.assertEquals(audiobookExpected, audiobookReceived);
+        Mockito.verify(audiobookRepository, Mockito.times(1)).getAudiobook(validIsbn);
     }
 
     @Test
-    public void givingANonValidIsbnThenReturnNull(){
-        //Given
-        Mockito.when(audiobookRepository.getAudiobook("")).thenReturn(null);
+    public void givingANonValidIsbnThenThrowException() {
+        // Given
+        String invalidIsbn = "";
+        AudiobookNotFoundException exception = new AudiobookNotFoundException(invalidIsbn);
+        Mockito.when(audiobookRepository.getAudiobook(invalidIsbn)).thenThrow(exception);
 
-        //When
-        Audiobook audiobookReceived = getAudiobookUseCase.execute("");
+        // When
+        try {
+            getAudiobookUseCase.execute(invalidIsbn);
+            Assertions.fail("Expected AudiobookNotFoundException was not thrown");
+        } catch (AudiobookNotFoundException e) {
+            // Then
+            Assertions.assertEquals(exception.getMessage(), e.getMessage());
+            Mockito.verify(audiobookRepository, Mockito.times(1)).getAudiobook(invalidIsbn);
+        }
+    }
 
-        //Then
-        Assertions.assertNull(audiobookReceived);
-        Mockito.verify(audiobookRepository, Mockito.times(1)).getAudiobook("");
+    @Test
+    public void givingANullIsbnThenThrowException() {
+        // Given
+        String nullIsbn = null;
+        AudiobookNotFoundException exception = new AudiobookNotFoundException(nullIsbn);
+        Mockito.when(audiobookRepository.getAudiobook(nullIsbn)).thenThrow(exception);
 
+        // When
+        try {
+            getAudiobookUseCase.execute(nullIsbn);
+            Assertions.fail("Expected AudiobookNotFoundException was not thrown");
+        } catch (AudiobookNotFoundException e) {
+            // Then
+            Assertions.assertEquals(exception.getMessage(), e.getMessage());
+            Mockito.verify(audiobookRepository, Mockito.times(1)).getAudiobook(nullIsbn);
+        }
     }
 
     @Test
     public void testGetAudiobookCallsRepository() {
         // Given
         String audiobookIsbn = "123";
-        Audiobook audiobookExpected = new Audiobook(audiobookIsbn, "Title", "Author", "Genre", "Year", "Duration");
+        Audiobook audiobookExpected = new Audiobook("123", "Title", "Author", "Genre", "Year", "Duration");
         Mockito.when(audiobookRepository.getAudiobook(audiobookIsbn)).thenReturn(audiobookExpected);
 
         // When
@@ -72,18 +90,5 @@ class GetAudiobookUseCaseTest {
         // Then
         Mockito.verify(audiobookRepository, Mockito.times(1)).getAudiobook(audiobookIsbn);
         Assertions.assertEquals(audiobookExpected, audiobookReceived);
-    }
-
-    @Test
-    public void givingANullIsbnThenReturnNull(){
-        //Given
-        Mockito.when(audiobookRepository.getAudiobook(null)).thenReturn(null);
-
-        //When
-        Audiobook audiobookReceived = getAudiobookUseCase.execute(null);
-
-        //Then
-        Assertions.assertNull(audiobookReceived);
-        Mockito.verify(audiobookRepository, Mockito.times(1)).getAudiobook(null);
     }
 }

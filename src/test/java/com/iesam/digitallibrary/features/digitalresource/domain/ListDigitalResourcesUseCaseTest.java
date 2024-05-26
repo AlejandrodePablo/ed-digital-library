@@ -40,12 +40,12 @@ class ListDigitalResourcesUseCaseTest {
     @Test
     public void givenEBooksAndAudiobooksThenReturnCombinedList() {
         // Given
-        EBook eBook1 = new EBook("001", "EBook Title 1", "Author 1", "Genre 1", "2021", "English");
-        EBook eBook2 = new EBook("002", "EBook Title 2", "Author 2", "Genre 2", "2022", "Spanish");
+        EBook eBook1 = new EBook("EBook Title 1", "Author 1", "Genre 1", "2021", "English");
+        EBook eBook2 = new EBook("EBook Title 2", "Author 2", "Genre 2", "2022", "Spanish");
         List<EBook> eBooks = Arrays.asList(eBook1, eBook2);
 
-        Audiobook audiobook1 = new Audiobook("003", "Audiobook Title 1", "Author 3", "Genre 3", "2023", "120");
-        Audiobook audiobook2 = new Audiobook("004", "Audiobook Title 2", "Author 4", "Genre 4", "2024", "150");
+        Audiobook audiobook1 = new Audiobook("Audiobook Title 1", "Author 3", "Genre 3", "2023", "120");
+        Audiobook audiobook2 = new Audiobook( "Audiobook Title 2", "Author 4", "Genre 4", "2024", "150");
         List<Audiobook> audiobooks = Arrays.asList(audiobook1, audiobook2);
 
         Mockito.when(eBookRepository.getEBooks()).thenReturn(eBooks);
@@ -84,7 +84,7 @@ class ListDigitalResourcesUseCaseTest {
     @Test
     void givenSomeEmptyRepositoriesThenReturnNonEmptyList() {
         // Given
-        EBook eBook1 = new EBook("001", "EBook Title 1", "Author 1", "Genre 1", "2021", "English");
+        EBook eBook1 = new EBook("EBook Title 1", "Author 1", "Genre 1", "2021", "English");
         List<EBook> eBooks = Arrays.asList(eBook1);
 
         List<Audiobook> audiobooks = Arrays.asList();  // No audiobooks
@@ -108,8 +108,8 @@ class ListDigitalResourcesUseCaseTest {
         // Given
         List<EBook> eBooks = Arrays.asList();  // No eBooks
 
-        Audiobook audiobook1 = new Audiobook("003", "Audiobook Title 1", "Author 3", "Genre 3", "2023", "120");
-        Audiobook audiobook2 = new Audiobook("004", "Audiobook Title 2", "Author 4", "Genre 4", "2024", "150");
+        Audiobook audiobook1 = new Audiobook("Audiobook Title 1", "Author 3", "Genre 3", "2023", "120");
+        Audiobook audiobook2 = new Audiobook("Audiobook Title 2", "Author 4", "Genre 4", "2024", "150");
         List<Audiobook> audiobooks = Arrays.asList(audiobook1, audiobook2);
 
         Mockito.when(eBookRepository.getEBooks()).thenReturn(eBooks);

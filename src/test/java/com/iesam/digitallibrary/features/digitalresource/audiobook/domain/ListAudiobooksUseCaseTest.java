@@ -33,8 +33,8 @@ class ListAudiobooksUseCaseTest {
     @Test
     public void ifExistsAudiobooksThenReturnTheAudiobookList() {
         // Given
-        Audiobook audiobook1 = new Audiobook("100", "Title1", "Author1", "Comedy", "2024", "60");
-        Audiobook audiobook2 = new Audiobook("200", "Title2", "Author2", "Fiction", "2024", "120");
+        Audiobook audiobook1 = new Audiobook("Title1", "Author1", "Comedy", "2024", "60");
+        Audiobook audiobook2 = new Audiobook("Title2", "Author2", "Fiction", "2024", "120");
         Mockito.when(audiobookRepository.getAudiobooks()).thenReturn(List.of(audiobook1, audiobook2));
 
         // When
@@ -62,7 +62,7 @@ class ListAudiobooksUseCaseTest {
     @Test
     public void ifExistsSingleAudiobookThenReturnTheSingleAudiobookList() {
         // Given
-        Audiobook audiobook = new Audiobook("100", "Title1", "Author1", "Comedy", "2024", "167");
+        Audiobook audiobook = new Audiobook("Title1", "Author1", "Comedy", "2024", "167");
         Mockito.when(audiobookRepository.getAudiobooks()).thenReturn(List.of(audiobook));
 
         // When

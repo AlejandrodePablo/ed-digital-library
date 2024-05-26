@@ -14,4 +14,16 @@ public class DigitalResource {
         this.genre = genre;
         this.publicationYear = publicationYear;
     }
+
+    public DigitalResource(String title, String author, String genre, String publicationYear) {
+        this.isbn = generateUniqueIsbn();
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.publicationYear = publicationYear;
+    }
+    private static String generateUniqueIsbn() {
+        return String.valueOf(System.currentTimeMillis());
+    }
+
 }

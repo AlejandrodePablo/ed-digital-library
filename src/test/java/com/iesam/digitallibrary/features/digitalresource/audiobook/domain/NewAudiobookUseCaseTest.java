@@ -31,7 +31,7 @@ class NewAudiobookUseCaseTest {
     @Test
     void givenValidAudiobookThenSaveAudiobook() {
         // Given
-        Audiobook validAudiobook = new Audiobook("123", "Title", "Author", "Genre", "Year", "Duration");
+        Audiobook validAudiobook = new Audiobook( "Title", "Author", "Genre", "Year", "Duration");
 
         // When
         newAudiobookUseCase.execute(validAudiobook);

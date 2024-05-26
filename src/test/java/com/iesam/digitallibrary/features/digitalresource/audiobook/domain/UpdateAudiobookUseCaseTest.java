@@ -30,8 +30,8 @@ class UpdateAudiobookUseCaseTest {
     public void givenExistingAudiobookThenUpdateAudiobook() {
         // Given
         String existingIsbn = "123";
-        Audiobook existingAudiobook = new Audiobook(existingIsbn, "Title", "Author", "Genre", "Year", "Duration");
-        Audiobook updatedAudiobook = new Audiobook(existingIsbn, "New Title", "New Author", "New Genre", "New Year", "New Duration");
+        Audiobook existingAudiobook = new Audiobook("Title", "Author", "Genre", "Year", "Duration");
+        Audiobook updatedAudiobook = new Audiobook("New Title", "New Author", "New Genre", "New Year", "New Duration");
         Mockito.when(audiobookRepository.getAudiobook(existingIsbn)).thenReturn(existingAudiobook);
 
         // When
@@ -45,7 +45,7 @@ class UpdateAudiobookUseCaseTest {
     void givenNonExistingAudiobookThenThrowException() {
         // Given
         String nonExistingIsbn = "456";
-        Audiobook updatedAudiobook = new Audiobook(nonExistingIsbn, "Title", "Author", "Genre", "Year", "Duration");
+        Audiobook updatedAudiobook = new Audiobook("Title", "Author", "Genre", "Year", "Duration");
         Mockito.when(audiobookRepository.getAudiobook(nonExistingIsbn)).thenReturn(null);
 
         // When

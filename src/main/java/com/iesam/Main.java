@@ -13,12 +13,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int opcion;
         do {
-            System.out.println("Menú Principal:");
+            System.out.println("\nMenú Principal:");
             System.out.println("1. Gestionar Usuarios");
             System.out.println("2. Gestionar Recursos Digitales");
             System.out.println("3. Gestionar Préstamos");
             System.out.println("4. Salir");
-            System.out.print("Ingrese su opción: ");
+            System.out.print("Ingrese su opción: \n");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:

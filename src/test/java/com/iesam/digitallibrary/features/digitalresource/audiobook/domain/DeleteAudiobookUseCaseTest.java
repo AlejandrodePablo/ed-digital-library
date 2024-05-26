@@ -30,7 +30,7 @@ class DeleteAudiobookUseCaseTest {
     void givenExistingAudiobookThenDeleteAudiobook() {
         // Given
         String isbn = "123";
-        Audiobook existingAudiobook = new Audiobook(isbn, "Title", "Author", "Genre", "Year", "Duration");
+        Audiobook existingAudiobook = new Audiobook("Title", "Author", "Genre", "Year", "Duration");
         Mockito.when(audiobookRepository.getAudiobook(isbn)).thenReturn(existingAudiobook);
 
         // When
