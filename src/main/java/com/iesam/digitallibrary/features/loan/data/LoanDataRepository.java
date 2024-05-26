@@ -8,9 +8,10 @@ import java.util.List;
 
 public class LoanDataRepository implements LoanRepository {
 
-    LoanFileLocalDataSource loanFileLocalDataSource = new LoanFileLocalDataSource();
+    LoanFileLocalDataSource loanFileLocalDataSource;
 
     public LoanDataRepository(LoanFileLocalDataSource loanFileLocalDataSource) {
+        this.loanFileLocalDataSource = loanFileLocalDataSource;
     }
 
     @Override
@@ -28,3 +29,5 @@ public class LoanDataRepository implements LoanRepository {
         this.loanFileLocalDataSource.delete(id);
     }
 }
+
+

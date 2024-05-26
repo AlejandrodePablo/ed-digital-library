@@ -1,7 +1,10 @@
 package com.iesam.digitallibrary.features.digitalresource.domain;
 
+import java.util.List;
+
 public interface DigitalResourceRepository {
 
-    void getDigitalResources();
+    List<DigitalResource> getDigitalResources();
+
     DigitalResource getDigitalResource(String isbn);
 }

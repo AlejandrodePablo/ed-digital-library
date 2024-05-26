@@ -4,6 +4,8 @@ import com.iesam.digitallibrary.features.digitalresource.data.local.DigitalResou
 import com.iesam.digitallibrary.features.digitalresource.domain.DigitalResource;
 import com.iesam.digitallibrary.features.digitalresource.domain.DigitalResourceRepository;
 
+import java.util.List;
+
 public class DigitalResourceDataRepository implements DigitalResourceRepository {
 
     public DigitalResourceFileLocalDataSource dRLocal;
@@ -13,8 +15,8 @@ public class DigitalResourceDataRepository implements DigitalResourceRepository 
     }
 
     @Override
-    public void getDigitalResources() {
-        dRLocal.findAll();
+    public List<DigitalResource> getDigitalResources() {
+        return dRLocal.findAll();
     }
 
     @Override
